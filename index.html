@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>호르무즈 해협 알아보기</title>
+    <title>어린이 글로벌 그림카드 🌍</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -18,10 +18,15 @@
     
     <div class="app-container">
         <header>
-            <h1>어린이 그림카드: 호르무즈 해협 🚢</h1>
+            <h1>어린이 글로벌 그림카드 🌍</h1>
+            <button id="homeBtn" class="home-btn" style="display: none;">🏠 다른 주제 고르기</button>
         </header>
+
+        <div id="homeMenu" class="home-menu">
+            <!-- Menu Cards Injected here -->
+        </div>
         
-        <main class="carousel-container">
+        <main id="carouselView" class="carousel-container" style="display: none;">
             <!-- Cards will be injected by JavaScript -->
             <div class="cards-wrapper" id="cardsWrapper"></div>
             
