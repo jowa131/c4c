@@ -225,6 +225,8 @@ const topicsData = {
 let activeTopicId = null;
 let currentDeck = [];
 let currentIndex = 0;
+let autoPlayedCards = new Set();
+let currentPlayingBtn = null;
 
 const homeMenu = document.getElementById('homeMenu');
 const carouselView = document.getElementById('carouselView');
@@ -266,6 +268,9 @@ function loadTopic(topicId) {
     
     // Render Deck
     renderCards();
+    
+    // Trigger auto-play logic for the first card
+    setTimeout(() => updateCards(), 100);
 }
 
 homeBtn.addEventListener('click', () => {
@@ -313,13 +318,21 @@ if ('speechSynthesis' in window) {
 
 function playSound(text, lang, btnElement) {
     if ('speechSynthesis' in window) {
+        if (window.speechSynthesis.speaking && currentPlayingBtn === btnElement && btnElement !== null) {
+            window.speechSynthesis.cancel();
+            if (btnElement) btnElement.classList.remove('playing');
+            currentPlayingBtn = null;
+            return;
+        }
+
         window.speechSynthesis.cancel();
         document.querySelectorAll('.sound-btn.playing').forEach(btn => btn.classList.remove('playing'));
+        currentPlayingBtn = btnElement;
         
         const utterance = new SpeechSynthesisUtterance(text);
         utterance.lang = lang;
-        utterance.rate = 0.9;
-        utterance.pitch = 1.1;
+        utterance.rate = (lang === 'ko-KR') ? 0.95 : 0.9;
+        utterance.pitch = (lang === 'ko-KR') ? 1.2 : 1.1;
 
         if (availableVoices.length > 0) {
             let selectedVoice = null;
@@ -339,7 +352,7 @@ function playSound(text, lang, btnElement) {
 
             } else if (lang === 'ko-KR') {
                 let krVoices = availableVoices.filter(v => v.lang.includes('ko-KR') || v.lang.includes('ko_KR'));
-                const krKeywords = ['siri', 'yuna', 'google 한국의'];
+                const krKeywords = ['google', 'premium', 'yuna', 'siri', 'google 한국의'];
                 selectedVoice = krVoices.find(v => krKeywords.some(k => v.name.toLowerCase().includes(k))) || krVoices[0];
             }
             if (selectedVoice) {
@@ -349,8 +362,14 @@ function playSound(text, lang, btnElement) {
         
         if (btnElement) {
             utterance.onstart = () => btnElement.classList.add('playing');
-            utterance.onend = () => btnElement.classList.remove('playing');
-            utterance.onerror = () => btnElement.classList.remove('playing');
+            utterance.onend = () => {
+                btnElement.classList.remove('playing');
+                if (currentPlayingBtn === btnElement) currentPlayingBtn = null;
+            };
+            utterance.onerror = () => {
+                btnElement.classList.remove('playing');
+                if (currentPlayingBtn === btnElement) currentPlayingBtn = null;
+            };
         }
 
         window.speechSynthesis.speak(utterance);
@@ -418,11 +437,29 @@ function updateCards() {
     const cards = document.querySelectorAll('.card');
     const dots = document.querySelectorAll('.dot');
     
-    if ('speechSynthesis' in window) window.speechSynthesis.cancel(); 
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel(); 
+        if (currentPlayingBtn) currentPlayingBtn.classList.remove('playing');
+        currentPlayingBtn = null;
+    }
     
     cards.forEach((card, index) => {
         card.classList.remove('active', 'prev');
-        if (index === currentIndex) card.classList.add('active');
+        if (index === currentIndex) {
+            card.classList.add('active');
+            
+            // Auto-play exact ONE time on card reveal
+            const cardKey = `${activeTopicId}-${index}`;
+            if (!autoPlayedCards.has(cardKey) && ttsUnlocked) {
+                autoPlayedCards.add(cardKey);
+                const text = currentDeck[index].text;
+                // Find matching button to animate
+                const btnArgs = card.querySelectorAll('.sound-btn');
+                let koBtn = null;
+                if (btnArgs.length > 0) koBtn = btnArgs[0]; // first sound btn is the text explanation
+                setTimeout(() => playSound(text, 'ko-KR', koBtn), 400); // slight delay for smooth visual transition
+            }
+        }
         else if (index < currentIndex) card.classList.add('prev');
     });
 
