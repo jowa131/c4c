@@ -172,6 +172,53 @@ const topicsData = {
                 ]
             }
         ]
+    },
+    ocean: {
+        title: "바다의 먹보 통통이",
+        icon: "♻️",
+        desc: "바다 동물 구조대 쓰레기 청소 대작전",
+        cards: [
+            {
+                image: 'assets/ocean_card1.png',
+                text: "팩맨처럼 입이 큰 청소선 '통통이'가 바다 위를 둥둥 떠다니는 플라스틱 병을 발견해요! 야호, 맛있는 간식이다!",
+                vocab: [
+                    { word: "OCEAN CLEANUP", meaning: "바다 청소" },
+                    { word: "TRASH!", meaning: "찌꺼기!" }
+                ]
+            },
+            {
+                image: 'assets/ocean_card2.png',
+                text: "플라스틱 병을 냠냠! 쓰레기를 먹을 때마다 배가 부르고 바다가 깨끗해져요.",
+                vocab: [
+                    { word: "EAT PLASTIC", meaning: "플라스틱 먹기" },
+                    { word: "YUMMY", meaning: "맛있다" }
+                ]
+            },
+            {
+                image: 'assets/ocean_card3.png',
+                text: "쓰레기가 사라진 깨끗한 물 속에서 거북이 친구들이 통통이에게 고맙다고 인사해요!",
+                vocab: [
+                    { word: "THANK YOU", meaning: "고마워" },
+                    { word: "CLEAN WATER", meaning: "깨끗한 물" }
+                ]
+            },
+            {
+                image: 'assets/ocean_card4.png',
+                text: "쓰레기를 가득 모은 통통이가 재활용 공장으로 돌아가요. 쓰레기들이 멋진 장난감으로 변신한대요!",
+                vocab: [
+                    { word: "RECYCLING", meaning: "재활용" },
+                    { word: "NEW TOY", meaning: "새 장난감" }
+                ]
+            },
+            {
+                image: 'assets/ocean_card5.png',
+                text: "우리도 집에서 쓰레기를 잘 분리해서 버리면 바다 청소선 통통이를 도울 수 있어요!",
+                vocab: [
+                    { word: "SAVE EARTH", meaning: "지구 구하기" },
+                    { word: "HERO", meaning: "영웅" }
+                ]
+            }
+        ]
     }
 };
 
