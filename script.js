@@ -50,12 +50,53 @@ const nextBtn = document.getElementById('nextBtn');
 const progressIndicator = document.getElementById('progressIndicator');
 
 // TTS Function Play
-function playSound(text, lang) {
+let availableVoices = [];
+function loadVoices() {
+    availableVoices = window.speechSynthesis.getVoices();
+}
+if ('speechSynthesis' in window) {
+    // Chrome dynamically loads voices after page load
+    loadVoices();
+    if (speechSynthesis.onvoiceschanged !== undefined) {
+        speechSynthesis.onvoiceschanged = loadVoices;
+    }
+}
+
+function playSound(text, lang, btnElement) {
     if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
+        
+        // Remove animation class from previously playing buttons
+        document.querySelectorAll('.sound-btn.playing').forEach(btn => btn.classList.remove('playing'));
+        
         const utterance = new SpeechSynthesisUtterance(text);
         utterance.lang = lang;
         utterance.rate = 0.9;
+        utterance.pitch = 1.1;
+
+        if (availableVoices.length > 0) {
+            let selectedVoice = null;
+            if (lang === 'en-GB') {
+                selectedVoice = availableVoices.find(v => v.name.includes('Google UK English Female')) ||
+                                availableVoices.find(v => v.name.includes('Daniel')) ||
+                                availableVoices.find(v => v.name.includes('UK English')) ||
+                                availableVoices.find(v => v.lang === 'en-GB');
+            } else if (lang === 'ko-KR') {
+                selectedVoice = availableVoices.find(v => v.name.includes('Google 한국의')) ||
+                                availableVoices.find(v => v.name.includes('Yuna')) ||
+                                availableVoices.find(v => v.lang === 'ko-KR');
+            }
+            if (selectedVoice) {
+                utterance.voice = selectedVoice;
+            }
+        }
+        
+        if (btnElement) {
+            utterance.onstart = () => btnElement.classList.add('playing');
+            utterance.onend = () => btnElement.classList.remove('playing');
+            utterance.onerror = () => btnElement.classList.remove('playing');
+        }
+
         window.speechSynthesis.speak(utterance);
     } else {
         alert("이 브라우저에서는 소리 재생을 지원하지 않아요.");
@@ -76,7 +117,7 @@ function initCards() {
             <li class="vocab-item">
                 <div class="vocab-header">
                     <span class="vocab-word">🧩 ${v.word}</span>
-                    <button class="sound-btn" onclick="playSound('${v.word.replace(/'/g, "\\'")}', 'en-US')" title="영어 듣기">
+                    <button class="sound-btn" onclick="playSound('${v.word.replace(/'/g, "\\'")}', 'en-GB', this)" title="영어 듣기">
                         🔊
                     </button>
                 </div>
@@ -91,7 +132,7 @@ function initCards() {
             <div class="card-content">
                 <div class="text-wrapper">
                     <div class="main-text">${data.text}</div>
-                    <button class="sound-btn" onclick="playSound('${data.text.replace(/'/g, "\\'")}', 'ko-KR')" title="한국어 설명 듣기" style="flex-shrink:0;">
+                    <button class="sound-btn" onclick="playSound('${data.text.replace(/'/g, "\\'")}', 'ko-KR', this)" title="한국어 설명 듣기" style="flex-shrink:0;">
                         🔊
                     </button>
                 </div>
