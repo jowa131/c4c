@@ -63,8 +63,8 @@ body {
     position: relative;
     z-index: 1;
     width: 100%;
-    max-width: 1000px;
-    padding: 20px;
+    max-width: 100vw;
+    padding: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -86,11 +86,11 @@ header h1 {
 /* Updated for Tablet PC size */
 .carousel-container {
     position: relative;
-    width: 100%;
-    max-width: 900px;
-    height: 75vh;
-    max-height: 800px;
-    min-height: 600px;
+    width: 95vw;
+    max-width: 1200px;
+    height: 85vh;
+    max-height: 1000px;
+    min-height: 500px;
     perspective: 1000px;
 }
 
@@ -135,7 +135,7 @@ header h1 {
 
 .card-image-container {
     width: 100%;
-    height: 55%;
+    height: 60%;
     overflow: hidden;
     position: relative;
     border-bottom: 4px dashed #f0f0f0;
@@ -154,10 +154,10 @@ header h1 {
 }
 
 .card-content {
-    padding: 30px;
+    padding: 15px 30px 20px 30px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
     flex: 1;
     overflow-y: auto;
 }
@@ -170,10 +170,10 @@ header h1 {
 }
 
 .main-text {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-weight: 800;
     color: var(--text-color);
-    line-height: 1.5;
+    line-height: 1.4;
     text-align: center;
     position: relative;
     flex: 1;
@@ -203,7 +203,7 @@ header h1 {
     background: var(--vocab-bg);
     border: 3px solid var(--vocab-border);
     border-radius: 12px;
-    padding: 20px;
+    padding: 15px;
 }
 
 .vocab-title {
@@ -338,9 +338,9 @@ header h1 {
 }
 
 @media (max-width: 768px) {
-    header h1 { font-size: 1.8rem; }
-    .carousel-container { height: 700px; }
-    .main-text { font-size: 1.25rem; }
-    .vocab-word { font-size: 1.1rem; }
-    .vocab-meaning { font-size: 1rem; }
+    header h1 { font-size: 1.8rem; margin-bottom: 1rem; }
+    .carousel-container { height: 85vh; width: 95vw; }
+    .main-text { font-size: 1.4rem; }
+    .vocab-word { font-size: 1.2rem; }
+    .vocab-meaning { font-size: 1.1rem; }
 }
