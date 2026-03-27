@@ -77,14 +77,15 @@ function playSound(text, lang, btnElement) {
         if (availableVoices.length > 0) {
             let selectedVoice = null;
             if (lang === 'en-GB') {
-                selectedVoice = availableVoices.find(v => v.name.includes('Google UK English Female')) ||
-                                availableVoices.find(v => v.name.includes('Daniel')) ||
-                                availableVoices.find(v => v.name.includes('UK English')) ||
-                                availableVoices.find(v => v.lang === 'en-GB');
+                let gbVoices = availableVoices.filter(v => v.lang.includes('en-GB') || v.lang.includes('en_GB'));
+                if (gbVoices.length === 0) gbVoices = availableVoices.filter(v => v.lang.startsWith('en'));
+                
+                const premiumKeywords = ['google', 'apple', 'natural', 'premium', 'daniel', 'arthur', 'uk english'];
+                selectedVoice = gbVoices.find(v => premiumKeywords.some(k => v.name.toLowerCase().includes(k))) || gbVoices[0];
             } else if (lang === 'ko-KR') {
-                selectedVoice = availableVoices.find(v => v.name.includes('Google 한국의')) ||
-                                availableVoices.find(v => v.name.includes('Yuna')) ||
-                                availableVoices.find(v => v.lang === 'ko-KR');
+                let krVoices = availableVoices.filter(v => v.lang.includes('ko-KR') || v.lang.includes('ko_KR'));
+                const premiumKrKeywords = ['google', 'apple', 'yuna', 'premium', 'natural'];
+                selectedVoice = krVoices.find(v => premiumKrKeywords.some(k => v.name.toLowerCase().includes(k))) || krVoices[0];
             }
             if (selectedVoice) {
                 utterance.voice = selectedVoice;
