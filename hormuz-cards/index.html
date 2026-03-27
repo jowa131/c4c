@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>호르무즈 해협 알아보기</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="background-animation">
+        <div class="bubble bubble1"></div>
+        <div class="bubble bubble2"></div>
+        <div class="bubble bubble3"></div>
+        <div class="bubble bubble4"></div>
+        <div class="bubble bubble5"></div>
+    </div>
+    
+    <div class="app-container">
+        <header>
+            <h1>어린이 그림카드: 호르무즈 해협 🚢</h1>
+        </header>
+        
+        <main class="carousel-container">
+            <!-- Cards will be injected by JavaScript -->
+            <div class="cards-wrapper" id="cardsWrapper"></div>
+            
+            <button class="nav-button prev" id="prevBtn" aria-label="Previous card">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <button class="nav-button next" id="nextBtn" aria-label="Next card">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+            
+            <div class="progress-indicator" id="progressIndicator"></div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
