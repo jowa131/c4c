@@ -61,7 +61,7 @@ const topicsData = {
                 ]
             },
             {
-                image: 'assets/card6.png', // Placeholder until generated
+                image: 'assets/inflation_2.png',
                 text: "인플레이션이라고 부르는 이 마법은, 돈의 가치가 떨어져서 물건 가격이 자꾸자꾸 올라가는 현상이에요.",
                 vocab: [
                     { word: "MONEY LOSING VALUE", meaning: "돈의 가치가 떨어져요" },
@@ -69,14 +69,14 @@ const topicsData = {
                 ]
             },
             {
-                image: 'assets/card6.png', // Placeholder until generated
+                image: 'assets/inflation_3.png',
                 text: "가격이 너무 비싸지면 아빠 엄마가 장난감을 사주기 힘들어져서 우리는 슬퍼요.",
                 vocab: [
                     { word: "EMPTY WALLET", meaning: "텅 빈 지갑" }
                 ]
             },
             {
-                image: 'assets/card6.png', // Placeholder until generated
+                image: 'assets/inflation_4.png',
                 text: "그래서 은행이나 나라에서는 돈이 너무 많아지지 않게 조절하려고 노력한답니다.",
                 vocab: [
                     { word: "CENTRAL BANK", meaning: "중앙 은행" },
@@ -84,7 +84,7 @@ const topicsData = {
                 ]
             },
             {
-                image: 'assets/card6.png', // Placeholder until generated
+                image: 'assets/inflation_5.png',
                 text: "물가가 원래대로 돌아오면, 다시 기분 좋게 아이스크림을 사 먹을 수 있을 거예요!",
                 vocab: [
                     { word: "HAPPY ECONOMY", meaning: "행복한 경제" },
@@ -107,7 +107,7 @@ const topicsData = {
                 ]
             },
             {
-                image: 'assets/card7.png', // Placeholder until generated
+                image: 'assets/climate_2.png',
                 text: "우리가 자동차를 너무 많이 타고 전기를 펑펑 쓰면 나쁜 연기(온실가스)가 나와서 지구를 덮어버려요.",
                 vocab: [
                     { word: "FACTORY SMOKE", meaning: "공장 매연" },
@@ -115,7 +115,7 @@ const topicsData = {
                 ]
             },
             {
-                image: 'assets/card7.png', // Placeholder until generated
+                image: 'assets/climate_3.png',
                 text: "지구가 더워지면 북극곰 친구의 집인 얼음이 녹아버리고 이상한 날씨가 변덕을 부려요.",
                 vocab: [
                     { word: "MELTING ICE", meaning: "녹고 있는 얼음" },
@@ -123,7 +123,7 @@ const topicsData = {
                 ]
             },
             {
-                image: 'assets/card7.png', // Placeholder until generated
+                image: 'assets/climate_4.png',
                 text: "지구의 열을 식히기 위해 쓰레기를 줄이고, 에너지를 아껴 쓰는 습관이 필요해요!",
                 vocab: [
                     { word: "SAVE ENERGY", meaning: "에너지 절약" },
@@ -131,7 +131,7 @@ const topicsData = {
                 ]
             },
             {
-                image: 'assets/card7.png', // Placeholder until generated
+                image: 'assets/climate_5.png',
                 text: "우리가 조금씩만 노력하면 지구는 다시 시원하고 건강해질 수 있답니다!",
                 vocab: [
                     { word: "COOL PLANET", meaning: "시원한 행성" },
@@ -154,7 +154,7 @@ const topicsData = {
                 ]
             },
             {
-                image: 'assets/card8.png', // Placeholder until generated
+                image: 'assets/ai_2.png',
                 text: "인공지능, 즉 AI는 사람의 뇌처럼 생각하고 배울 수 있는 아주 똑똑한 기술을 말해요.",
                 vocab: [
                     { word: "COMPUTER BRAIN", meaning: "컴퓨터 두뇌" },
@@ -162,14 +162,14 @@ const topicsData = {
                 ]
             },
             {
-                image: 'assets/card8.png', // Placeholder until generated
+                image: 'assets/ai_3.png',
                 text: "AI는 의사 선생님을 도와 병을 찾기도 하고, 어려운 숙제 방향을 알려주기도 해요.",
                 vocab: [
                     { word: "HELPING HUMAN", meaning: "인간을 돕는 일" }
                 ]
             },
             {
-                image: 'assets/card8.png', // Placeholder until generated
+                image: 'assets/ai_4.png',
                 text: "하지만 로봇이 모든 걸 다 잘하는 건 아니에요. 나쁜 곳에 쓰이지 않게 사람이 잘 가르쳐야 해요.",
                 vocab: [
                     { word: "GOOD RULES", meaning: "올바른 규칙들" },
@@ -177,7 +177,7 @@ const topicsData = {
                 ]
             },
             {
-                image: 'assets/card8.png', // Placeholder until generated
+                image: 'assets/ai_5.png',
                 text: "미래에는 AI가 우리들의 아주 멋지고 착한 로봇 친구가 되어 세상이 더 편리해질 거예요!",
                 vocab: [
                     { word: "BEST FRIENDS", meaning: "가장 친한 친구" },
