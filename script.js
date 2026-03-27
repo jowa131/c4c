@@ -49,6 +49,22 @@ const prevBtn = document.getElementById('prevBtn');
 const nextBtn = document.getElementById('nextBtn');
 const progressIndicator = document.getElementById('progressIndicator');
 
+// TTS Function Play
+function playSound(text, lang) {
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = lang;
+        utterance.rate = 0.9;
+        window.speechSynthesis.speak(utterance);
+    } else {
+        alert("이 브라우저에서는 소리 재생을 지원하지 않아요.");
+    }
+}
+
+// Make playSound accessible globally since we use inline onclick
+window.playSound = playSound;
+
 // Initialize cards
 function initCards() {
     cardsData.forEach((data, index) => {
@@ -58,7 +74,12 @@ function initCards() {
 
         const vocabHtml = data.vocab.map(v => `
             <li class="vocab-item">
-                <span class="vocab-word">🧩 ${v.word}</span>
+                <div class="vocab-header">
+                    <span class="vocab-word">🧩 ${v.word}</span>
+                    <button class="sound-btn" onclick="playSound('${v.word.replace(/'/g, "\\'")}', 'en-US')" title="영어 듣기">
+                        🔊
+                    </button>
+                </div>
                 <span class="vocab-meaning">${v.meaning}</span>
             </li>
         `).join('');
@@ -68,7 +89,12 @@ function initCards() {
                 <img src="${data.image}" alt="Slide image" class="card-image">
             </div>
             <div class="card-content">
-                <div class="main-text">${data.text}</div>
+                <div class="text-wrapper">
+                    <div class="main-text">${data.text}</div>
+                    <button class="sound-btn" onclick="playSound('${data.text.replace(/'/g, "\\'")}', 'ko-KR')" title="한국어 설명 듣기" style="flex-shrink:0;">
+                        🔊
+                    </button>
+                </div>
                 <div class="vocab-section">
                     <div class="vocab-title">🔡 그림 속 영어 뜻 알아보기</div>
                     <ul class="vocab-list">
@@ -92,6 +118,11 @@ function initCards() {
 function updateCards() {
     const cards = document.querySelectorAll('.card');
     const dots = document.querySelectorAll('.dot');
+    
+    // Stop speaking when turning page
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel(); 
+    }
     
     cards.forEach((card, index) => {
         card.classList.remove('active', 'prev');
@@ -131,26 +162,35 @@ nextBtn.addEventListener('click', () => {
     if (currentIndex < cardsData.length - 1) goToCard(currentIndex + 1);
 });
 
-// Touch/Swipe Support
+// Advanced Touch/Swipe Support
 let touchStartX = 0;
+let touchStartY = 0;
 let touchEndX = 0;
+let touchEndY = 0;
 
 cardsWrapper.addEventListener('touchstart', e => {
     touchStartX = e.changedTouches[0].screenX;
-});
+    touchStartY = e.changedTouches[0].screenY;
+}, {passive: true});
 
 cardsWrapper.addEventListener('touchend', e => {
     touchEndX = e.changedTouches[0].screenX;
+    touchEndY = e.changedTouches[0].screenY;
     handleSwipe();
-});
+}, {passive: true});
 
 function handleSwipe() {
-    const swipeThreshold = 50;
-    if (touchEndX < touchStartX - swipeThreshold) {
-        goToCard(currentIndex + 1); // Swipe left
-    }
-    if (touchEndX > touchStartX + swipeThreshold) {
-        goToCard(currentIndex - 1); // Swipe right
+    const swipeThreshold = 50; 
+    const diffX = touchEndX - touchStartX;
+    const diffY = touchEndY - touchStartY;
+    
+    // Check if the gesture is more horizontal than vertical
+    if (Math.abs(diffX) > Math.abs(diffY)) {
+        if (diffX < -swipeThreshold) {
+            goToCard(currentIndex + 1); // Swipe left
+        } else if (diffX > swipeThreshold) {
+            goToCard(currentIndex - 1); // Swipe right
+        }
     }
 }
 

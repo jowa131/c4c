@@ -63,7 +63,7 @@ body {
     position: relative;
     z-index: 1;
     width: 100%;
-    max-width: 800px;
+    max-width: 1000px;
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -72,7 +72,7 @@ body {
 
 header {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 2rem;
 }
 
 header h1 {
@@ -83,11 +83,14 @@ header h1 {
     letter-spacing: 1px;
 }
 
+/* Updated for Tablet PC size */
 .carousel-container {
     position: relative;
     width: 100%;
-    max-width: 600px;
-    height: 600px;
+    max-width: 900px;
+    height: 75vh;
+    max-height: 800px;
+    min-height: 600px;
     perspective: 1000px;
 }
 
@@ -132,7 +135,7 @@ header h1 {
 
 .card-image-container {
     width: 100%;
-    height: 50%;
+    height: 55%;
     overflow: hidden;
     position: relative;
     border-bottom: 4px dashed #f0f0f0;
@@ -141,92 +144,134 @@ header h1 {
 .card-image {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    background: #fdfdfd;
     transition: transform 0.5s ease;
 }
 
 .card:hover .card-image {
-    transform: scale(1.05);
+    transform: scale(1.03);
 }
 
 .card-content {
-    padding: 25px;
+    padding: 30px;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 20px;
     flex: 1;
     overflow-y: auto;
 }
 
-.english-text {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--text-color);
-    line-height: 1.4;
-    text-align: center;
-    position: relative;
+.text-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 15px;
 }
 
-.english-text::before {
-    content: '"';
-    color: var(--primary-color);
-    font-size: 2rem;
-    opacity: 0.5;
-    position: absolute;
-    top: -10px;
-    left: -15px;
+.main-text {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text-color);
+    line-height: 1.5;
+    text-align: center;
+    position: relative;
+    flex: 1;
 }
-.english-text::after {
+
+.main-text::before {
     content: '"';
     color: var(--primary-color);
-    font-size: 2rem;
+    font-size: 2.5rem;
     opacity: 0.5;
     position: absolute;
-    bottom: -20px;
-    right: -10px;
+    top: -15px;
+    left: -20px;
+}
+.main-text::after {
+    content: '"';
+    color: var(--primary-color);
+    font-size: 2.5rem;
+    opacity: 0.5;
+    position: absolute;
+    bottom: -30px;
+    right: -15px;
 }
 
 .vocab-section {
     margin-top: auto;
     background: var(--vocab-bg);
-    border: 2px solid var(--vocab-border);
+    border: 3px solid var(--vocab-border);
     border-radius: 12px;
-    padding: 15px;
+    padding: 20px;
 }
 
 .vocab-title {
     font-weight: 800;
     color: var(--accent-color);
-    margin-bottom: 10px;
-    font-size: 1.1rem;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 8px;
 }
 
 .vocab-list {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 12px;
 }
 
 .vocab-item {
-    font-size: 1rem;
+    font-size: 1.2rem;
     display: flex;
     flex-direction: column;
+}
+
+.vocab-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .vocab-word {
     font-weight: 800;
     color: var(--primary-color);
-    font-size: 1rem;
+    font-size: 1.2rem;
+}
+
+.sound-btn {
+    background: white;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.sound-btn:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: scale(1.1);
+}
+
+.sound-btn:active {
+    transform: scale(0.95);
 }
 
 .vocab-meaning {
     color: #555;
-    font-size: 0.9rem;
-    margin-top: 2px;
+    font-size: 1.05rem;
+    margin-top: 4px;
+    padding-left: 2px;
 }
 
 /* Navigation Buttons */
@@ -237,8 +282,8 @@ header h1 {
     background: white;
     color: var(--primary-color);
     border: none;
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     cursor: pointer;
     box-shadow: 0 4px 15px rgba(0,0,0,0.15);
@@ -260,21 +305,21 @@ header h1 {
     transform: translateY(-50%) scale(0.95);
 }
 
-.nav-button.prev { left: -25px; }
-.nav-button.next { right: -25px; }
+.nav-button.prev { left: -30px; }
+.nav-button.next { right: -30px; }
 
 /* Progress Indicator */
 .progress-indicator {
     display: flex;
     justify-content: center;
-    gap: 10px;
-    margin-top: 25px;
+    gap: 12px;
+    margin-top: 30px;
     z-index: 10;
 }
 
 .dot {
-    width: 12px;
-    height: 12px;
+    width: 14px;
+    height: 14px;
     background: rgba(255, 255, 255, 0.4);
     border-radius: 50%;
     cursor: pointer;
@@ -287,12 +332,15 @@ header h1 {
     transform: scale(1.3);
 }
 
+@media (max-width: 1024px) {
+    .nav-button.prev { left: 15px; }
+    .nav-button.next { right: 15px; }
+}
+
 @media (max-width: 768px) {
-    .nav-button.prev { left: 10px; }
-    .nav-button.next { right: 10px; }
-    header h1 { font-size: 1.6rem; }
-    .carousel-container { height: 650px; }
-    .english-text { font-size: 1.1rem; }
-    .vocab-word { font-size: 0.95rem; }
-    .vocab-meaning { font-size: 0.85rem; }
+    header h1 { font-size: 1.8rem; }
+    .carousel-container { height: 700px; }
+    .main-text { font-size: 1.25rem; }
+    .vocab-word { font-size: 1.1rem; }
+    .vocab-meaning { font-size: 1rem; }
 }
