@@ -8,41 +8,40 @@ const topicsData = {
                 image: 'assets/card1.png',
                 text: "이곳은 호르무즈 해협이에요. 세계의 아주 많은 배들이 지나다니는 좁고 중요한 바닷길이랍니다.",
                 vocab: [
-                    { word: "STRAIT OF HORMUZ", meaning: "호르무즈 해협 (지도 표시)" },
-                    { word: "SO MUCH OIL TRAVELS HERE!", meaning: "정말 많은 석유가 지나가요!" }
+                    { word: "SHIP", meaning: "배" },
+                    { word: "SEA", meaning: "바다" }
                 ]
             },
             {
                 image: 'assets/card2.png',
                 text: "만약 이 길이 막히면 어떻게 될까요? 배들이 지나가지 못해서 우리가 쓰는 물건들이 아주 비싸질 수 있어요.",
                 vocab: [
-                    { word: "ROAD CLOSED?", meaning: "길이 막혔나요?" },
-                    { word: "GOODS EXPENSIVE!", meaning: "물건들이 비싸져요!" }
+                    { word: "STOP", meaning: "멈춤" },
+                    { word: "WALL", meaning: "벽" }
                 ]
             },
             {
                 image: 'assets/card3.png',
                 text: "석유가 오지 못하면 자동차나 배가 움직일 수 있는 연료가 부족해져요. 그래서 큰 문제가 생길 수 있답니다.",
                 vocab: [
-                    { word: "IF THE ROAD IS CLOSED...", meaning: "만약 길이 막힌다면..." },
-                    { word: "FUEL EMPTY", meaning: "연료 텅 빔" },
-                    { word: "HIGH PRICES!", meaning: "매우 비싼 가격!" }
+                    { word: "CAR", meaning: "자동차" },
+                    { word: "GAS", meaning: "기름 (연료)" }
                 ]
             },
             {
                 image: 'assets/card4.png',
                 text: "그래서 여러 나라 사람들이 모여서 이 중요한 바닷길을 안전하게 지키기 위해 대화하고 노력하고 있어요.",
                 vocab: [
-                    { word: "WORKING FOR PEACE", meaning: "평화를 위한 노력" }
+                    { word: "FRIENDS", meaning: "친구들" },
+                    { word: "EARTH", meaning: "지구" }
                 ]
             },
             {
                 image: 'assets/card5.png',
                 text: "모두를 위한 소중한 바닷길! 이 길 덕분에 전 세계 사람들이 에너지를 나누어 쓸 수 있답니다.",
                 vocab: [
-                    { word: "OUR PRECIOUS PATHWAY", meaning: "우리의 소중한 길" },
-                    { word: "OPEN & SAFE ROUTE", meaning: "열려있고 안전한 길" },
-                    { word: "OUR ENERGY", meaning: "우리의 에너지" }
+                    { word: "GIFT", meaning: "선물" },
+                    { word: "SAFE", meaning: "안전한" }
                 ]
             }
         ]
@@ -56,39 +55,40 @@ const topicsData = {
                 image: 'assets/card6.png',
                 text: "앗! 내가 매일 사먹던 1,000원짜리 아이스크림이 갑자기 2,000원이 되었어요!",
                 vocab: [
-                    { word: "INFLATION", meaning: "인플레이션 (물가 상승)" },
-                    { word: "TOO EXPENSIVE", meaning: "너무 비싸요" }
+                    { word: "ICE CREAM", meaning: "아이스크림" },
+                    { word: "PRICE", meaning: "가격 (태그)" }
                 ]
             },
             {
                 image: 'assets/inflation_2.png',
                 text: "인플레이션이라고 부르는 이 마법은, 돈의 가치가 떨어져서 물건 가격이 자꾸자꾸 올라가는 현상이에요.",
                 vocab: [
-                    { word: "MONEY LOSING VALUE", meaning: "돈의 가치가 떨어져요" },
-                    { word: "PRICES GOING UP", meaning: "가격이 올라가요" }
+                    { word: "COIN", meaning: "동전" },
+                    { word: "MONEY", meaning: "돈" }
                 ]
             },
             {
                 image: 'assets/inflation_3.png',
                 text: "가격이 너무 비싸지면 아빠 엄마가 장난감을 사주기 힘들어져서 우리는 슬퍼요.",
                 vocab: [
-                    { word: "EMPTY WALLET", meaning: "텅 빈 지갑" }
+                    { word: "WALLET", meaning: "지갑" },
+                    { word: "TOY", meaning: "장난감" }
                 ]
             },
             {
                 image: 'assets/inflation_4.png',
                 text: "그래서 은행이나 나라에서는 돈이 너무 많아지지 않게 조절하려고 노력한답니다.",
                 vocab: [
-                    { word: "CENTRAL BANK", meaning: "중앙 은행" },
-                    { word: "HARD WORK", meaning: "열심히 하는 노력" }
+                    { word: "BANK", meaning: "은행" },
+                    { word: "VACUUM", meaning: "청소기" }
                 ]
             },
             {
                 image: 'assets/inflation_5.png',
                 text: "물가가 원래대로 돌아오면, 다시 기분 좋게 아이스크림을 사 먹을 수 있을 거예요!",
                 vocab: [
-                    { word: "HAPPY ECONOMY", meaning: "행복한 경제" },
-                    { word: "STABLE PRICES", meaning: "안정적인 가격" }
+                    { word: "SUN", meaning: "해" },
+                    { word: "SMILE", meaning: "미소 (웃음)" }
                 ]
             }
         ]
@@ -102,40 +102,40 @@ const topicsData = {
                 image: 'assets/card7.png',
                 text: "지구가 땀을 뻘뻘 흘리며 열이 나고 있어요. 너무 달궈졌거든요!",
                 vocab: [
-                    { word: "CLIMATE CHANGE", meaning: "기후 변화" },
-                    { word: "HOT EARTH", meaning: "뜨거운 지구" }
+                    { word: "EARTH", meaning: "지구" },
+                    { word: "FAN", meaning: "부채" }
                 ]
             },
             {
                 image: 'assets/climate_2.png',
                 text: "우리가 자동차를 너무 많이 타고 전기를 펑펑 쓰면 나쁜 연기(온실가스)가 나와서 지구를 덮어버려요.",
                 vocab: [
-                    { word: "FACTORY SMOKE", meaning: "공장 매연" },
-                    { word: "GREENHOUSE GAS", meaning: "온실 가스" }
+                    { word: "FACTORY", meaning: "공장" },
+                    { word: "SMOKE", meaning: "연기 (매연)" }
                 ]
             },
             {
                 image: 'assets/climate_3.png',
                 text: "지구가 더워지면 북극곰 친구의 집인 얼음이 녹아버리고 이상한 날씨가 변덕을 부려요.",
                 vocab: [
-                    { word: "MELTING ICE", meaning: "녹고 있는 얼음" },
-                    { word: "SAD POLAR BEAR", meaning: "슬픈 북극곰" }
+                    { word: "POLAR BEAR", meaning: "북극곰" },
+                    { word: "ICE", meaning: "얼음" }
                 ]
             },
             {
                 image: 'assets/climate_4.png',
                 text: "지구의 열을 식히기 위해 쓰레기를 줄이고, 에너지를 아껴 쓰는 습관이 필요해요!",
                 vocab: [
-                    { word: "SAVE ENERGY", meaning: "에너지 절약" },
-                    { word: "RECYCLE", meaning: "재활용" }
+                    { word: "TREE", meaning: "나무" },
+                    { word: "BOTTLE", meaning: "물병 (플라스틱)" }
                 ]
             },
             {
                 image: 'assets/climate_5.png',
                 text: "우리가 조금씩만 노력하면 지구는 다시 시원하고 건강해질 수 있답니다!",
                 vocab: [
-                    { word: "COOL PLANET", meaning: "시원한 행성" },
-                    { word: "SMILING EARTH", meaning: "미소짓는 지구" }
+                    { word: "SUNGLASSES", meaning: "선글라스" },
+                    { word: "LEAF", meaning: "나뭇잎" }
                 ]
             }
         ]
@@ -149,39 +149,40 @@ const topicsData = {
                 image: 'assets/card8.png',
                 text: "우와! 컴퓨터가 사람 말을 이해하고 그림도 뚝딱 그려주네요?",
                 vocab: [
-                    { word: "ARTIFICIAL INTELLIGENCE", meaning: "인공지능" },
-                    { word: "SMART ROBOT", meaning: "똑똑한 로봇" }
+                    { word: "ROBOT", meaning: "로봇" },
+                    { word: "BOOK", meaning: "책" }
                 ]
             },
             {
                 image: 'assets/ai_2.png',
                 text: "인공지능, 즉 AI는 사람의 뇌처럼 생각하고 배울 수 있는 아주 똑똑한 기술을 말해요.",
                 vocab: [
-                    { word: "COMPUTER BRAIN", meaning: "컴퓨터 두뇌" },
-                    { word: "LEARNING CHIP", 단어: "학습하는 칩" }
+                    { word: "CHIP", meaning: "컴퓨터 칩" },
+                    { word: "LIGHTBULB", meaning: "전구 (아이디어)" }
                 ]
             },
             {
                 image: 'assets/ai_3.png',
                 text: "AI는 의사 선생님을 도와 병을 찾기도 하고, 어려운 숙제 방향을 알려주기도 해요.",
                 vocab: [
-                    { word: "HELPING HUMAN", meaning: "인간을 돕는 일" }
+                    { word: "DOCTOR", meaning: "의사" },
+                    { word: "X-RAY", meaning: "엑스레이" }
                 ]
             },
             {
                 image: 'assets/ai_4.png',
                 text: "하지만 로봇이 모든 걸 다 잘하는 건 아니에요. 나쁜 곳에 쓰이지 않게 사람이 잘 가르쳐야 해요.",
                 vocab: [
-                    { word: "GOOD RULES", meaning: "올바른 규칙들" },
-                    { word: "TEAMWORK", meaning: "팀워크 (협동)" }
+                    { word: "TEAMWORK", meaning: "팀워크 (협동)" },
+                    { word: "PUZZLE", meaning: "퍼즐" }
                 ]
             },
             {
                 image: 'assets/ai_5.png',
                 text: "미래에는 AI가 우리들의 아주 멋지고 착한 로봇 친구가 되어 세상이 더 편리해질 거예요!",
                 vocab: [
-                    { word: "BEST FRIENDS", meaning: "가장 친한 친구" },
-                    { word: "BETTER FUTURE", meaning: "더 나은 미래" }
+                    { word: "HAND", meaning: "손 (잡기)" },
+                    { word: "CITY", meaning: "도시 건물들" }
                 ]
             }
         ]
@@ -237,15 +238,40 @@ homeBtn.addEventListener('click', () => {
     homeMenu.style.display = 'grid';
 });
 
-// TTS Function Play
+// ==== iOS TTS / AudioContext Warm-up Trick ====
+let ttsUnlocked = false;
+
+function unlockTTS() {
+    if (ttsUnlocked) return;
+    if ('speechSynthesis' in window) {
+        // Trigger a silent utterance to bypass iOS Safari's auto-play block mechanism
+        let msg = new SpeechSynthesisUtterance('');
+        msg.volume = 0; // completely silent
+        msg.rate = 1;
+        window.speechSynthesis.speak(msg);
+        ttsUnlocked = true;
+    }
+    document.removeEventListener('click', unlockTTS);
+    document.removeEventListener('touchstart', unlockTTS);
+}
+
+// Bind unlock sequence to user's first interaction anywhere on the screen
+document.addEventListener('click', unlockTTS, { once: true });
+document.addEventListener('touchstart', unlockTTS, { once: true });
+
+
+// ==== Advanced Deep TTS Voice Selector (Async Safe) ====
 let availableVoices = [];
+
 function loadVoices() {
     availableVoices = window.speechSynthesis.getVoices();
 }
+
 if ('speechSynthesis' in window) {
     loadVoices();
+    // Watch for dynamic voice loading (crucial for Chrome and iOS Safari)
     if (speechSynthesis.onvoiceschanged !== undefined) {
-        speechSynthesis.onvoiceschanged = loadVoices;
+        speechSynthesis.addEventListener('voiceschanged', loadVoices);
     }
 }
 
@@ -264,14 +290,25 @@ function playSound(text, lang, btnElement) {
             let selectedVoice = null;
             if (lang === 'en-GB') {
                 let gbVoices = availableVoices.filter(v => v.lang.includes('en-GB') || v.lang.includes('en_GB'));
-                if (gbVoices.length === 0) gbVoices = availableVoices.filter(v => v.lang.startsWith('en'));
+                if (gbVoices.length === 0) gbVoices = availableVoices.filter(v => v.lang.startsWith('en')); // safety fallback
                 
-                const premiumKeywords = ['google', 'apple', 'natural', 'premium', 'daniel', 'arthur', 'uk english'];
-                selectedVoice = gbVoices.find(v => premiumKeywords.some(k => v.name.toLowerCase().includes(k))) || gbVoices[0];
+                // 1. Strict iOS / High-tier voice targeting
+                const iOsKeywords = ['daniel', 'martha', 'arthur', 'siri'];
+                selectedVoice = gbVoices.find(v => iOsKeywords.some(k => v.name.toLowerCase().includes(k)));
+                
+                // 2. Google UK fallback targeting
+                if (!selectedVoice) {
+                    const googleKeywords = ['google uk english', 'google'];
+                    selectedVoice = gbVoices.find(v => googleKeywords.some(k => v.name.toLowerCase().includes(k)));
+                }
+
+                // 3. Fallback to any UK voice
+                if (!selectedVoice) selectedVoice = gbVoices[0];
+
             } else if (lang === 'ko-KR') {
                 let krVoices = availableVoices.filter(v => v.lang.includes('ko-KR') || v.lang.includes('ko_KR'));
-                const premiumKrKeywords = ['google', 'apple', 'yuna', 'premium', 'natural'];
-                selectedVoice = krVoices.find(v => premiumKrKeywords.some(k => v.name.toLowerCase().includes(k))) || krVoices[0];
+                const krKeywords = ['siri', 'yuna', 'google 한국의'];
+                selectedVoice = krVoices.find(v => krKeywords.some(k => v.name.toLowerCase().includes(k))) || krVoices[0];
             }
             if (selectedVoice) {
                 utterance.voice = selectedVoice;
@@ -292,6 +329,7 @@ function playSound(text, lang, btnElement) {
 
 window.playSound = playSound;
 
+// ==== Carousel Render Logic ====
 function renderCards() {
     cardsWrapper.innerHTML = '';
     progressIndicator.innerHTML = '';
@@ -325,7 +363,7 @@ function renderCards() {
                     </button>
                 </div>
                 <div class="vocab-section">
-                    <div class="vocab-title">🔡 그림 속 영어 뜻 알아보기</div>
+                    <div class="vocab-title">🔡 그림 속 진짜 모양/행동 영어로 읽기</div>
                     <ul class="vocab-list">
                         ${vocabHtml}
                     </ul>
