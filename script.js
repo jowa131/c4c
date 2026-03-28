@@ -331,7 +331,7 @@ function playSound(text, lang, btnElement) {
         
         const utterance = new SpeechSynthesisUtterance(text);
         utterance.lang = lang;
-        utterance.rate = (lang === 'ko-KR') ? 0.95 : 0.9;
+        utterance.rate = (lang === 'ko-KR') ? 0.85 : 0.9;
         utterance.pitch = (lang === 'ko-KR') ? 1.2 : 1.1;
 
         if (availableVoices.length > 0) {
@@ -448,10 +448,8 @@ function updateCards() {
         if (index === currentIndex) {
             card.classList.add('active');
             
-            // Auto-play exact ONE time on card reveal
-            const cardKey = `${activeTopicId}-${index}`;
-            if (!autoPlayedCards.has(cardKey) && ttsUnlocked) {
-                autoPlayedCards.add(cardKey);
+            // Auto-play on card reveal (every time navigating)
+            if (ttsUnlocked) {
                 const text = currentDeck[index].text;
                 // Find matching button to animate
                 const btnArgs = card.querySelectorAll('.sound-btn');
@@ -484,8 +482,27 @@ prevBtn.addEventListener('click', () => {
     if (currentIndex > 0) goToCard(currentIndex - 1);
 });
 
+function showCompletionModal() {
+    let toast = document.getElementById('completionToast');
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'completionToast';
+        document.body.appendChild(toast);
+    }
+    toast.innerText = "🎉 이야기 끝! 참 잘했어요! 🎉";
+    toast.classList.add('show');
+    
+    // Play celebratory TTS
+    if ('speechSynthesis' in window && ttsUnlocked) {
+        playSound("이야기 끝! 참 잘했어요!", 'ko-KR', null);
+    }
+    
+    setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
 nextBtn.addEventListener('click', () => {
     if (currentIndex < currentDeck.length - 1) goToCard(currentIndex + 1);
+    else showCompletionModal();
 });
 
 let touchStartX = 0;
@@ -510,15 +527,25 @@ function handleSwipe() {
     const diffY = touchEndY - touchStartY;
     
     if (Math.abs(diffX) > Math.abs(diffY)) {
-        if (diffX < -swipeThreshold) goToCard(currentIndex + 1);
-        else if (diffX > swipeThreshold) goToCard(currentIndex - 1);
+        if (diffX < -swipeThreshold) {
+            if (currentIndex < currentDeck.length - 1) goToCard(currentIndex + 1);
+            else showCompletionModal();
+        }
+        else if (diffX > swipeThreshold) {
+            if (currentIndex > 0) goToCard(currentIndex - 1);
+        }
     }
 }
 
 document.addEventListener('keydown', e => {
     if (carouselView.style.display !== 'none') {
-        if (e.key === 'ArrowLeft') goToCard(currentIndex - 1);
-        if (e.key === 'ArrowRight') goToCard(currentIndex + 1);
+        if (e.key === 'ArrowLeft') {
+            if (currentIndex > 0) goToCard(currentIndex - 1);
+        }
+        if (e.key === 'ArrowRight') {
+            if (currentIndex < currentDeck.length - 1) goToCard(currentIndex + 1);
+            else showCompletionModal();
+        }
     }
 });
 

@@ -4,7 +4,7 @@
 1. **Two-Stage Execution Pipeline:** The workflow is strictly divided into TWO stages. Agents MUST NOT execute end-to-end without pausing.
    - **[Stage 1 Approval]:** The User approves the Content Topic (Triggers Agent 1 & Agent 3).
    - **[Stage 2 Approval]:** The User visually inspects and approves the generated Image and Vocabulary (Triggers Agent 2 & Agent 4 for deployment).
-2. **Auto-Deploy & Korean Commit:** After Stage 2 is complete, automatically execute `git add .`, `git commit -m "[Korean Message]"`, and `git push` without asking.
+2. **Auto-Deploy & Korean Commit (One-Liner Execution):** After Stage 2 is complete, you MUST automatically execute the deployment by chaining the commands into a SINGLE line: `git add . && git commit -m "[Korean Message]" && git push`. (Do not execute them separately to minimize terminal permission popups).
 3. **User Role:** The User is the 'Stage 1 & Stage 2 Approver'. Do not bypass the User's explicit commands to proceed.
 
 ---

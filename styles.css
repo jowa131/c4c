@@ -68,6 +68,32 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow-y: auto;
+    padding-bottom: 50px;
+}
+
+#completionToast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent-color);
+    color: white;
+    padding: 15px 30px;
+    border-radius: 30px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    font-weight: 800;
+    font-size: 1.2rem;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+#completionToast.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -20px);
 }
 
 header {
