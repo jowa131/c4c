@@ -390,13 +390,9 @@ header h1 {
 .vocab-item {
     font-size: 1.2rem;
     display: flex;
-    flex-direction: column;
-}
-
-.vocab-header {
-    display: flex;
     align-items: center;
-    gap: 10px;
+    flex-wrap: wrap;
+    gap: 8px;
 }
 
 .vocab-word {
@@ -458,7 +454,6 @@ header h1 {
 .vocab-meaning {
     color: #555;
     font-size: clamp(1rem, 2vw, 1.1rem);
-    margin-top: 4px;
     padding-left: 2px;
 }
 

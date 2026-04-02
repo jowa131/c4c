@@ -412,12 +412,10 @@ function renderCards() {
 
         const vocabHtml = data.vocab.map(v => `
             <li class="vocab-item">
-                <div class="vocab-header">
-                    <span class="vocab-word">🧩 ${v.word}</span>
-                    <button class="sound-btn" onclick="playSound('${v.word.replace(/'/g, "\\'")}', 'en-GB', this)" title="영어 듣기">
-                        🔊
-                    </button>
-                </div>
+                <span class="vocab-word">🧩 ${v.word}</span>
+                <button class="sound-btn" onclick="playSound('${v.word.replace(/'/g, "\\'")}', 'en-GB', this)" title="영어 듣기">
+                    🔊
+                </button>
                 <span class="vocab-meaning">${v.meaning || v.단어}</span>
             </li>
         `).join('');
