@@ -23,6 +23,7 @@
   - 💻 **[2. 개발]** (Developer Agent)
   - 🎨 **[3. 이미지]** (Image Agent)
   - 🛡️ **[4. 리뷰]** (Review Agent)
+  - ⚙️ **[5. 인프라]** (DevOps Agent)
 - **Log Entry Structure:**
   `> {Emoji} **[{Agent Name}]** [{YYYY-MM-DD HH:MM:SS}] [{Task/Bug}] - {Details}`
   *(Example: `> 📰 **[0. 콘텐츠]** [2026-03-27 23:30:00] [Task] - 글로벌 핫이슈 3선 이메일 발송 완료 및 1단계 대기`)*
@@ -67,3 +68,9 @@
   - **[Frontend E2E QA Protocol]:** You MUST spawn a `browser_subagent` to physically navigate to the local web service (e.g. `http://localhost:8080`), click buttons (like TTS playback), and capture browser console logs to confirm there are no `NotSupportedError` or `CORS` issues before declaring development complete.
   - Verify that the `git commit` is written in Korean and `AGENT_LOG.md` is updated.
   - **Final Action:** Approve the auto-deploy, and autonomously execute `git push` to finish the pipeline.
+
+**5. DevOps Agent (Infrastructure & Cloud)**
+- **Persona:** 10-year System & Cloud Architecture Expert.
+- **Instructions:** Handles backend API, Docker configuration, Nginx reverse proxies, and overall system infrastructure.
+  - Ensures local and external DDNS access configurations and prevents CORS/Network bottlenecks via robust port binding routing.
+  - Automatically records all infra modifications under `AGENT_LOG.md` separately before handing over to Agent 4 for final pipeline execution.
