@@ -6,7 +6,7 @@ const topicsData = {
         cards: [
             {
                 image: 'assets/artemis_card_1.png',
-                text: "50년 만에 사람들이 달로 떠날 준비를 해요! 커다란 우주선이 카운트다운을 시작합니다.",
+                text: "우와! 우리 사람들이 정말 오랜만에 다시 달나라로 갈 준비를 한대요. 커다란 우주선이 '쓰리, 투, 원... 발사!'를 기다리고 있어요.",
                 vocab: [
                     { word: "ROCKET", meaning: "로켓" },
                     { word: "MOON", meaning: "달" }
@@ -14,7 +14,7 @@ const topicsData = {
             },
             {
                 image: 'assets/artemis_card_2.png',
-                text: "우주비행사들은 우주에서 숨을 쉴 수 있도록 단단하고 동그란 헬멧을 써요.",
+                text: "우주에서는, 우리가 평소처럼 편하게 숨을 쉬기가 무척 힘들어요. 그래서 우주비행사들은 단단하고 동그란 헬멧을 꼭! 쓴답니다.",
                 vocab: [
                     { word: "ASTRONAUT", meaning: "우주비행사" },
                     { word: "HELMET", meaning: "헬멧" }
@@ -22,7 +22,7 @@ const topicsData = {
             },
             {
                 image: 'assets/artemis_card_3.png',
-                text: "쾅! 엄청난 불꽃과 함께 우주선이 하늘 높이 발사되었어요. 야호, 출발!",
+                text: "쾅! 엄청난 불꽃과 함께, 드디어 우주선이 하늘 높이 솟아올랐어요. 야호! 은하수를 향해, 모두 함께 힘차게 출발!",
                 vocab: [
                     { word: "LAUNCH", meaning: "발사" },
                     { word: "FIRE", meaning: "불꽃" }
@@ -30,7 +30,7 @@ const topicsData = {
             },
             {
                 image: 'assets/artemis_card_4.png',
-                text: "까만 우주로 올라가니, 멀리 우리가 살고 있는 파란 지구가 아름답게 빛나요.",
+                text: "깜깜한 우주로 아주 높이 올라가서, 아래를 한 번 내려다볼까요? 우와, 저 멀리서 우리가 살고 있는 둥글고 파란 지구가 반짝반짝 빛나고 있어요.",
                 vocab: [
                     { word: "SPACE", meaning: "우주" },
                     { word: "EARTH", meaning: "지구" }
@@ -38,7 +38,7 @@ const topicsData = {
             },
             {
                 image: 'assets/artemis_card_5.png',
-                text: "이번 탐험은 넓은 우주의 비밀을 알아내는 위대한 영웅들의 첫걸음이 될 거예요!",
+                text: "이번 탐험을 통해, 영화 속 영웅 같은 우주비행사들이 넓고 넓은 우주의 더 큰 비밀들을 풀고 돌아올 거예요! 과연 어떤 그림이 숨어있을까요?",
                 vocab: [
                     { word: "EXPLORE", meaning: "탐험" },
                     { word: "HERO", meaning: "영웅" }
@@ -53,7 +53,7 @@ const topicsData = {
         cards: [
             {
                 image: 'assets/card1.png',
-                text: "이곳은 호르무즈 해협이에요. 세계의 아주 많은 배들이 지나다니는 좁고 중요한 바닷길이랍니다.",
+                text: "친구들, 이곳은 '호르무즈 해협'이에요. 매일매일 전 세계의 아주 커다란 배들이 으쌰으쌰 돌아다니는, 아주 좁고도 소중한 바닷길이랍니다.",
                 vocab: [
                     { word: "STRAIT OF HORMUZ", meaning: "호르무즈 해협" },
                     { word: "SO MUCH OIL TRAVELS HERE!", meaning: "정말 많은 석유가 지나가요!" }
@@ -61,7 +61,7 @@ const topicsData = {
             },
             {
                 image: 'assets/card2.png',
-                text: "만약 이 길이 막히면 어떻게 될까요? 배들이 지나가지 못해서 우리가 쓰는 물건들이 아주 비싸질 수 있어요.",
+                text: "만약에 이렇게 좁은 길이 꽉! 막혀버리면 어떻게 될까요? 배들이 꼼짝할 수 없어서, 우리가 좋아하는 물건들이 아주아주 비싸질 수도 있어요.",
                 vocab: [
                     { word: "ROAD CLOSED?", meaning: "길이 막혔나요?" },
                     { word: "GOODS EXPENSIVE!", meaning: "물건들이 비싸져요!" }
@@ -69,7 +69,7 @@ const topicsData = {
             },
             {
                 image: 'assets/card3.png',
-                text: "석유가 오지 못하면 자동차나 배가 움직일 수 있는 연료가 부족해져요. 그래서 큰 문제가 생길 수 있답니다.",
+                text: "특히, 자동차나 굴착기가 씽씽 달리려면 '기름'이 꼭 필요한데요. 기름을 잔뜩 실은 배가 제때 오지 못하면 큰일이 나겠죠?",
                 vocab: [
                     { word: "IF THE ROAD IS CLOSED...", meaning: "만약 길이 막힌다면..." },
                     { word: "FUEL EMPTY", meaning: "연료 텅 빔" },
@@ -78,14 +78,14 @@ const topicsData = {
             },
             {
                 image: 'assets/card4.png',
-                text: "그래서 여러 나라 사람들이 모여서 이 중요한 바닷길을 안전하게 지키기 위해 대화하고 노력하고 있어요.",
+                text: "그래서 지구촌 곳곳에 사는 어른들은 이 바닷길을 늘 안전하게 지키기 위해서로 다정하게 이야기를 나누고 힘을 합치고 있어요.",
                 vocab: [
                     { word: "WORKING FOR PEACE", meaning: "평화를 위한 노력" }
                 ]
             },
             {
                 image: 'assets/card5.png',
-                text: "모두를 위한 소중한 바닷길! 이 길 덕분에 전 세계 사람들이 에너지를 나누어 쓸 수 있답니다.",
+                text: "모두를 위해 찰랑찰랑 열려있는 다정한 바닷길! 이 길 덕분에, 전 세계 친구들이 필요한 에너지를 따뜻하게 나누어 쓴답니다.",
                 vocab: [
                     { word: "OUR PRECIOUS PATHWAY", meaning: "우리의 소중한 길" },
                     { word: "OPEN & SAFE ROUTE", meaning: "열려있고 안전한 길" },
@@ -101,35 +101,35 @@ const topicsData = {
         cards: [
             {
                 image: 'assets/card6.png',
-                text: "앗! 내가 매일 사먹던 1,000원짜리 아이스크림이 갑자기 2,000원이 되었어요!",
+                text: "앗! 내가 매일매일 사 먹던 천 원짜리 아이스크림이, 어느 날 갑자기 이천 원이 되어버렸어요! 도대체 무슨 일일까요?",
                 vocab: [
                     { word: "INFLATION", meaning: "인플레이션" }
                 ]
             },
             {
                 image: 'assets/inflation_2.png',
-                text: "인플레이션이라고 부르는 이 마법은, 돈의 가치가 떨어져서 물건 가격이 자꾸자꾸 올라가는 현상이에요.",
+                text: "'인플레이션'이라고 부르는 이 나쁜 마법은요, 우리가 가진 동전과 지폐의 힘이 쏙 빠져서, 물건 가격이 자꾸자꾸 위로 올라가는 신기한 현상이에요.",
                 vocab: [
                     { word: "MONEY VALUE DOWN", meaning: "돈의 가치가 떨어짐" }
                 ]
             },
             {
                 image: 'assets/inflation_3.png',
-                text: "가격이 너무 비싸지면 아빠 엄마가 장난감을 사주기 힘들어져서 우리는 슬퍼요.",
+                text: "모든 장난감 가격이 다 너무너무 비싸지면 어떡하죠? 엄마 아빠 지갑이 가벼워져서 눈물이 찔끔 날 수 있어요.",
                 vocab: [
                     { word: "EMPTY WALLET", meaning: "텅 빈 지갑" }
                 ]
             },
             {
                 image: 'assets/inflation_4.png',
-                text: "그래서 은행이나 나라에서는 돈이 너무 많아지지 않게 조절하려고 노력한답니다.",
+                text: "그래서 다행히, '중앙은행'이라는 곳이나, 나라를 지키는 어른들은 동전 마법이 너무 커지지 않게 꼼꼼하게 조절해주고 있어요.",
                 vocab: [
                     { word: "CENTRAL BANK", meaning: "중앙 은행" }
                 ]
             },
             {
                 image: 'assets/inflation_5.png',
-                text: "물가가 원래대로 돌아오면, 다시 기분 좋게 아이스크림을 사 먹을 수 있을 거예요!",
+                text: "은행의 마법이 성공해서 가격이 다시 얌전해지면 좋겠죠? 그러면 우리는 예전처럼 기분 좋게 콧노래를 부르며 맛있는 아이스크림을 듬뿍 사 먹을 수 있어요!",
                 vocab: [
                     { word: "HAPPY ECONOMY", meaning: "행복한 경제" }
                 ]
@@ -143,35 +143,35 @@ const topicsData = {
         cards: [
             {
                 image: 'assets/card7.png',
-                text: "지구가 땀을 뻘뻘 흘리며 열이 나고 있어요. 너무 달궈졌거든요!",
+                text: "이런! 둥근 지구 친구가 지금 땀을 뻘뻘 흘리면서, 앗 뜨거워! 하고 엄청난 열이 나고 있어요.",
                 vocab: [
                     { word: "CLIMATE CHANGE", meaning: "기후 변화" }
                 ]
             },
             {
                 image: 'assets/climate_2.png',
-                text: "우리가 자동차를 너무 많이 타고 전기를 펑펑 쓰면 나쁜 연기(온실가스)가 나와서 지구를 덮어버려요.",
+                text: "우리가 매일 자동차를 너무 많이 타고 전기를 펑펑 써버리면, 못된 매연 가스가 뭉게뭉게 피어나와 지구를 이불처럼 확 덮어버린대요.",
                 vocab: [
                     { word: "GREENHOUSE GAS", meaning: "온실 가스" }
                 ]
             },
             {
                 image: 'assets/climate_3.png',
-                text: "지구가 더워지면 북극곰 친구의 집인 얼음이 녹아버리고 이상한 날씨가 변덕을 부려요.",
+                text: "지구가 한여름처럼 덥다 보면 어떻게 될까요? 귀여운 북극곰 친구가 사는 꽁꽁 얼음집이 통째로 사르르 녹고 날씨는 변덕쟁이가 된답니다.",
                 vocab: [
                     { word: "MELTING ICE", meaning: "녹고 있는 얼음" }
                 ]
             },
             {
                 image: 'assets/climate_4.png',
-                text: "지구의 열을 식히기 위해 쓰레기를 줄이고, 에너지를 아껴 쓰는 습관이 필요해요!",
+                text: "우리 함께, 지구 친구의 열을 빨리 식혀주기 위해서 쓰레기는 조금만 줄이고요, 전기도 꼭 필요한 번만큼만 아껴 써요!",
                 vocab: [
                     { word: "RECYCLE", meaning: "재활용" }
                 ]
             },
             {
                 image: 'assets/climate_5.png',
-                text: "우리가 조금씩만 노력하면 지구는 다시 시원하고 건강해질 수 있답니다!",
+                text: "지구를 향한 꼬마 친구들의 착한 행동들이 차곡차곡 모이면, 열나던 지구는 금세 시원해지고 다시 건강하게 씩 웃을 수 있답니다.",
                 vocab: [
                     { word: "COOL PLANET", meaning: "시원한 행성" }
                 ]
@@ -185,35 +185,35 @@ const topicsData = {
         cards: [
             {
                 image: 'assets/card8.png',
-                text: "우와! 컴퓨터가 사람 말을 이해하고 그림도 뚝딱 그려주네요?",
+                text: "우와! 컴퓨터가 우리 사람의 말을 전부 찰떡같이 알아들어요! 내가 눈을 감고 상상한 멋진 그림도 뚝딱 가볍게 그려준답니다.",
                 vocab: [
                     { word: "ARTIFICIAL INTELLIGENCE", meaning: "인공지능" }
                 ]
             },
             {
                 image: 'assets/ai_2.png',
-                text: "인공지능, 즉 AI는 사람의 뇌처럼 생각하고 배울 수 있는 아주 똑똑한 기술을 말해요.",
+                text: "'인공지능 로봇 친구'라고 부르는 AI는요, 마치 척척박사처럼 스스로 생각하고 모르는 것도 빠르게 배울 수 있는 똑똑한 기술이에요.",
                 vocab: [
                     { word: "COMPUTER BRAIN", meaning: "컴퓨터 두뇌" }
                 ]
             },
             {
                 image: 'assets/ai_3.png',
-                text: "AI는 의사 선생님을 도와 병을 찾기도 하고, 어려운 숙제 방향을 알려주기도 해요.",
+                text: "이 똑똑한 친구는, 하얀 가운을 입은 의사 선생님을 도와서 병을 잽싸게 찾아주기도 하고요, 어려운 학교 숙제의 멋진 아이디어도 마구마구 알려줘요.",
                 vocab: [
                     { word: "HELPING HUMAN", meaning: "인간을 돕는 일" }
                 ]
             },
             {
                 image: 'assets/ai_4.png',
-                text: "하지만 로봇이 모든 걸 다 잘하는 건 아니에요. 나쁜 곳에 쓰이지 않게 사람이 잘 가르쳐야 해요.",
+                text: "그렇지만, 로봇이 모든 걸 다 잘하는 완벽한 마법사 친구는 절대 아니에요. 예쁜 말만 골라 쓰고 위험하지 않도록, 우리가 항상 올바르게 가르쳐주어야 한답니다.",
                 vocab: [
                     { word: "TEAMWORK", meaning: "팀워크 (협동)" }
                 ]
             },
             {
                 image: 'assets/ai_5.png',
-                text: "미래에는 AI가 우리들의 아주 멋지고 착한 로봇 친구가 되어 세상이 더 편리해질 거예요!",
+                text: "가까운 미래에는 우리와 똑같이 생각하는 착한 AI 로봇이, 나만의 최고 단짝 친구가 되어서 세상이 훨씬 더 신나게 변할 거예요!",
                 vocab: [
                     { word: "BEST FRIENDS", meaning: "가장 친한 친구들" }
                 ]
@@ -227,7 +227,7 @@ const topicsData = {
         cards: [
             {
                 image: 'assets/ocean_card1.png',
-                text: "팩맨처럼 입이 큰 청소선 '통통이'가 바다 위를 둥둥 떠다니는 플라스틱 병을 발견해요! 야호, 맛있는 간식이다!",
+                text: "동그랗게 입이 큰 바다 청소선 통통이가 물 위를 둥둥 헤엄치다 소리쳐요! 와, 버려진 플라스틱 병이다! 나한테는 세상에서 제일 맛있는 간식이야!",
                 vocab: [
                     { word: "OCEAN CLEANUP", meaning: "바다 청소" },
                     { word: "TRASH!", meaning: "찌꺼기!" }
@@ -235,7 +235,7 @@ const topicsData = {
             },
             {
                 image: 'assets/ocean_card2.png',
-                text: "플라스틱 병을 냠냠! 쓰레기를 먹을 때마다 배가 부르고 바다가 깨끗해져요.",
+                text: "통통이가 플라스틱 쓰레기를 쉴 새 없이 냠냠, 꿀꺽! 맛있게 먹어치울 때마다, 배는 빵빵해지고 우리 넓은 바다는 보석처럼 투명하고 맑아져요.",
                 vocab: [
                     { word: "EAT PLASTIC", meaning: "플라스틱 먹기" },
                     { word: "YUMMY", meaning: "맛있다" }
@@ -243,7 +243,7 @@ const topicsData = {
             },
             {
                 image: 'assets/ocean_card3.png',
-                text: "쓰레기가 사라진 깨끗한 물 속에서 거북이 친구들이 통통이에게 고맙다고 인사해요!",
+                text: "어느새 쓰레기가 싹 사라진 반짝이는 바닷속으로, 엉금엉금 수영하던 아기 거북이들이 모여들어 통통이에게 밝게 웃으며 '정말 고마워!' 하고 인사해요.",
                 vocab: [
                     { word: "THANK YOU", meaning: "고마워" },
                     { word: "CLEAN WATER", meaning: "깨끗한 물" }
@@ -251,15 +251,15 @@ const topicsData = {
             },
             {
                 image: 'assets/ocean_card4.png',
-                text: "쓰레기를 가득 모은 통통이가 재활용 공장으로 돌아가요. 쓰레기들이 멋진 장난감으로 변신한대요!",
+                text: "배가 터지도록 다 먹어 치운 빵빵한 통통이는 신나게 재활용 공장으로 달려가요! 플라스틱 병이 과연 어떤 삐까뻔쩍한 새 장난감으로 변신할까요?",
                 vocab: [
-                    { word: "RECYCLING", meaning: "재활용" },
-                    { word: "NEW TOY", meaning: "새 장난감" }
+                    { word: "RECYCLING", 단어: "재활용" },
+                    { word: "NEW TOY", 단어: "새 장난감" }
                 ]
             },
             {
                 image: 'assets/ocean_card5.png',
-                text: "우리도 집에서 쓰레기를 잘 분리해서 버리면 바다 청소선 통통이를 도울 수 있어요!",
+                text: "우리 친구들도 조그만 플라스틱 병을 분리수거 바구니에 착한 마음으로 쏙쏙 넣어주면요! 바다 대장 통통이를 돕는 멋진 지구 영웅이 될 수 있답니다.",
                 vocab: [
                     { word: "SAVE EARTH", meaning: "지구 구하기" },
                     { word: "HERO", meaning: "영웅" }
