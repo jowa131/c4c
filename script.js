@@ -1,4 +1,51 @@
 const topicsData = {
+    artemis: {
+        title: "달나라 탐험대 출동 (Artemis II)",
+        icon: "🚀",
+        desc: "50년 만에 사람들이 달로 떠나는 위대한 모험",
+        cards: [
+            {
+                image: 'assets/artemis_card_1.png',
+                text: "50년 만에 사람들이 달로 떠날 준비를 해요! 커다란 우주선이 카운트다운을 시작합니다.",
+                vocab: [
+                    { word: "ROCKET", meaning: "로켓" },
+                    { word: "MOON", meaning: "달" }
+                ]
+            },
+            {
+                image: 'assets/artemis_card_2.png',
+                text: "우주비행사들은 우주에서 숨을 쉴 수 있도록 단단하고 동그란 헬멧을 써요.",
+                vocab: [
+                    { word: "ASTRONAUT", meaning: "우주비행사" },
+                    { word: "HELMET", meaning: "헬멧" }
+                ]
+            },
+            {
+                image: 'assets/artemis_card_3.png',
+                text: "쾅! 엄청난 불꽃과 함께 우주선이 하늘 높이 발사되었어요. 야호, 출발!",
+                vocab: [
+                    { word: "LAUNCH", meaning: "발사" },
+                    { word: "FIRE", meaning: "불꽃" }
+                ]
+            },
+            {
+                image: 'assets/artemis_card_4.png',
+                text: "까만 우주로 올라가니, 멀리 우리가 살고 있는 파란 지구가 아름답게 빛나요.",
+                vocab: [
+                    { word: "SPACE", meaning: "우주" },
+                    { word: "EARTH", meaning: "지구" }
+                ]
+            },
+            {
+                image: 'assets/artemis_card_5.png',
+                text: "이번 탐험은 넓은 우주의 비밀을 알아내는 위대한 영웅들의 첫걸음이 될 거예요!",
+                vocab: [
+                    { word: "EXPLORE", meaning: "탐험" },
+                    { word: "HERO", meaning: "영웅" }
+                ]
+            }
+        ]
+    },
     hormuz: {
         title: "호르무즈 해협",
         icon: "🚢",
