@@ -185,6 +185,8 @@ header h1 {
     perspective: 1000px;
     margin: 0 auto;
     min-height: 0; /* Allow flexbox to shrink past content safely */
+    overflow: hidden; /* Fix horizontal frame dragging */
+    touch-action: pan-y; /* Prevent browser horizontal swipe navigation */
 }
 
 .cards-wrapper {
@@ -462,30 +464,38 @@ header h1 {
 
     .card-image-container {
         width: 100%;
-        height: 55%; /* Image takes top half */
+        height: auto; /* Prioritize width dynamically */
+        aspect-ratio: 16 / 9; /* Preserve width-first proportion */
+        flex-shrink: 0;
         border-right: none;
-        border-bottom: 4px dashed #f0f0f0;
+        border-bottom: 2px dashed #f0f0f0;
     }
 
     .card-content {
         width: 100%;
-        height: 45%; /* Text takes bottom half */
-        padding: 15px;
+        flex: 1; /* Text dynamically takes the remaining bottom half */
+        padding: 12px;
         justify-content: flex-start;
+        overflow-y: auto;
     }
 
     .main-text { 
-        font-size: clamp(1.2rem, 3vw, 1.5rem); 
+        font-size: clamp(1rem, 4vw, 1.25rem); 
+        line-height: 1.35;
+    }
+    .vocab-title {
+        font-size: 1.05rem;
+        margin-bottom: 8px;
     }
     .vocab-word { 
-        font-size: clamp(1.1rem, 2.5vw, 1.2rem); 
+        font-size: clamp(0.95rem, 3vw, 1.1rem); 
     }
     .vocab-meaning { 
-        font-size: clamp(1rem, 2vw, 1.1rem); 
+        font-size: clamp(0.9rem, 2.8vw, 1rem); 
     }
     .vocab-section {
         padding: 10px;
-        margin-top: 10px;
+        margin-top: 8px;
     }
     
     .nav-button {
