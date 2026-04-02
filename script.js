@@ -366,7 +366,7 @@ async function playSound(text, lang, btnElement) {
     if (btnElement) btnElement.classList.add('playing'); // 로딩 피드백
 
     try {
-        const response = await fetch(`/api/tts?text=${encodeURIComponent(text)}&lang=${lang}`);
+        const response = await fetch(`api/tts?text=${encodeURIComponent(text)}&lang=${lang}`);
 
         if (!response.ok) throw new Error('TTS 서버 에러');
 
