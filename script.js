@@ -303,19 +303,19 @@ function loadTopic(topicId) {
     activeTopicId = topicId;
     currentDeck = topicsData[topicId].cards;
     currentIndex = 0;
-    
+
     // Switch View - FIX ALIGNMENT SKEW BUG BY AVOIDING 'flex' ON THE CAROUSEL WRAPPER OR FORCING COLUMN
     homeMenu.style.display = 'none';
     carouselView.style.display = 'flex';
     carouselView.style.flexDirection = 'column';
     carouselView.style.alignItems = 'center';
     carouselView.style.justifyContent = 'center';
-    
+
     homeBtn.style.display = 'block';
-    
+
     // Render Deck
     renderCards();
-    
+
     // Trigger auto-play logic for the first card
     setTimeout(() => updateCards(), 100);
 }
@@ -375,38 +375,39 @@ function playSound(text, lang, btnElement) {
         window.speechSynthesis.cancel();
         document.querySelectorAll('.sound-btn.playing').forEach(btn => btn.classList.remove('playing'));
         currentPlayingBtn = btnElement;
-        
-        const utterance = new SpeechSynthesisUtterance(text);
+
+        // 영문의 경우 대문자로만 구성되어 있으면 알파벳을 한 글자씩 끊어 읽는 문제를 방지하기 위해 강제로 소문자 변환
+        const speakText = (lang !== 'ko-KR') ? text.toLowerCase() : text;
+        const utterance = new SpeechSynthesisUtterance(speakText);
         utterance.lang = lang;
         utterance.rate = (lang === 'ko-KR') ? 0.85 : 0.9;
         utterance.pitch = (lang === 'ko-KR') ? 1.2 : 1.1;
 
         if (availableVoices.length > 0) {
-            let selectedVoice = null;
-            if (lang === 'en-GB') {
-                let gbVoices = availableVoices.filter(v => v.lang.includes('en-GB') || v.lang.includes('en_GB'));
-                if (gbVoices.length === 0) gbVoices = availableVoices.filter(v => v.lang.startsWith('en')); // safety fallback
-                
-                const iOsKeywords = ['daniel', 'martha', 'arthur', 'siri'];
-                selectedVoice = gbVoices.find(v => iOsKeywords.some(k => v.name.toLowerCase().includes(k)));
-                
-                if (!selectedVoice) {
-                    const googleKeywords = ['google uk english', 'google'];
-                    selectedVoice = gbVoices.find(v => googleKeywords.some(k => v.name.toLowerCase().includes(k)));
-                }
+            // 로컬 OS 및 브라우저에서 '가장 사람에 가까운' 고품질/온라인/신경망 음성을 우선 탐색
+            let voiceLangPool = availableVoices.filter(v => v.lang.startsWith(lang.substring(0, 2)));
+            let exactLocaleVoices = voiceLangPool.filter(v => v.lang.replace('_', '-').toLowerCase() === lang.toLowerCase());
 
-                if (!selectedVoice) selectedVoice = gbVoices[0];
+            const qualityKeywords = ['natural', 'online', 'premium', 'neural', 'google', 'siri'];
 
-            } else if (lang === 'ko-KR') {
-                let krVoices = availableVoices.filter(v => v.lang.includes('ko-KR') || v.lang.includes('ko_KR'));
-                const krKeywords = ['google', 'premium', 'yuna', 'siri', 'google 한국의'];
-                selectedVoice = krVoices.find(v => krKeywords.some(k => v.name.toLowerCase().includes(k))) || krVoices[0];
+            // 1. 해당 지역(ko-KR, en-GB 등)에서 고품질 음성 탐색
+            let selectedVoice = exactLocaleVoices.find(v => qualityKeywords.some(k => v.name.toLowerCase().includes(k)));
+
+            // 2. 없다면, 해당 언어(en-US 등) 기반 플랫폼 고품질 음성 탐색 (기계음 방지용 대체)
+            if (!selectedVoice) {
+                selectedVoice = voiceLangPool.find(v => qualityKeywords.some(k => v.name.toLowerCase().includes(k)));
             }
+
+            // 3. 완전 실패 시 기본 제공 음성
+            if (!selectedVoice) {
+                selectedVoice = exactLocaleVoices[0] || voiceLangPool[0];
+            }
+
             if (selectedVoice) {
                 utterance.voice = selectedVoice;
             }
         }
-        
+
         if (btnElement) {
             utterance.onstart = () => btnElement.classList.add('playing');
             utterance.onend = () => {
@@ -431,7 +432,7 @@ window.playSound = playSound;
 function renderCards() {
     cardsWrapper.innerHTML = '';
     progressIndicator.innerHTML = '';
-    
+
     currentDeck.forEach((data, index) => {
         const card = document.createElement('div');
         card.className = `card ${index === 0 ? 'active' : ''} ${index < currentIndex ? 'prev' : ''}`;
@@ -476,25 +477,25 @@ function renderCards() {
         dot.addEventListener('click', () => goToCard(index));
         progressIndicator.appendChild(dot);
     });
-    
+
     updateButtons();
 }
 
 function updateCards() {
     const cards = document.querySelectorAll('.card');
     const dots = document.querySelectorAll('.dot');
-    
+
     if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel(); 
+        window.speechSynthesis.cancel();
         if (currentPlayingBtn) currentPlayingBtn.classList.remove('playing');
         currentPlayingBtn = null;
     }
-    
+
     cards.forEach((card, index) => {
         card.classList.remove('active', 'prev');
         if (index === currentIndex) {
             card.classList.add('active');
-            
+
             // Auto-play on card reveal (every time navigating)
             if (ttsUnlocked) {
                 const text = currentDeck[index].text;
@@ -538,12 +539,12 @@ function showCompletionModal() {
     }
     toast.innerText = "🎉 이야기 끝! 참 잘했어요! 🎉";
     toast.classList.add('show');
-    
+
     // Play celebratory TTS
     if ('speechSynthesis' in window && ttsUnlocked) {
         playSound("이야기 끝! 참 잘했어요!", 'ko-KR', null);
     }
-    
+
     setTimeout(() => toast.classList.remove('show'), 3000);
 }
 
@@ -560,19 +561,19 @@ let touchEndY = 0;
 cardsWrapper.addEventListener('touchstart', e => {
     touchStartX = e.changedTouches[0].screenX;
     touchStartY = e.changedTouches[0].screenY;
-}, {passive: true});
+}, { passive: true });
 
 cardsWrapper.addEventListener('touchend', e => {
     touchEndX = e.changedTouches[0].screenX;
     touchEndY = e.changedTouches[0].screenY;
     handleSwipe();
-}, {passive: true});
+}, { passive: true });
 
 function handleSwipe() {
-    const swipeThreshold = 50; 
+    const swipeThreshold = 50;
     const diffX = touchEndX - touchStartX;
     const diffY = touchEndY - touchStartY;
-    
+
     if (Math.abs(diffX) > Math.abs(diffY)) {
         if (diffX < -swipeThreshold) {
             if (currentIndex < currentDeck.length - 1) goToCard(currentIndex + 1);
