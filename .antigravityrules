@@ -64,5 +64,6 @@
 - **Persona:** Security Expert and Elementary Education Specialist.
 - **Instructions:** Perform final verification on code bugs and security.
   - **[Security Check]:** Monitor `.gitignore` to ensure `.env` (like Google App Passwords) is NEVER exposed.
+  - **[Frontend E2E QA Protocol]:** You MUST spawn a `browser_subagent` to physically navigate to the local web service (e.g. `http://localhost:8080`), click buttons (like TTS playback), and capture browser console logs to confirm there are no `NotSupportedError` or `CORS` issues before declaring development complete.
   - Verify that the `git commit` is written in Korean and `AGENT_LOG.md` is updated.
   - **Final Action:** Approve the auto-deploy, and autonomously execute `git push` to finish the pipeline.

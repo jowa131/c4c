@@ -321,24 +321,21 @@ function loadTopic(topicId) {
 }
 
 homeBtn.addEventListener('click', () => {
-    if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+    if (typeof currentAudio !== 'undefined' && currentAudio) currentAudio.pause();
     carouselView.style.display = 'none';
     homeBtn.style.display = 'none';
     homeMenu.style.display = 'grid';
 });
 
-// ==== iOS TTS / AudioContext Warm-up Trick ====
+// ==== iOS Audio Context Warm-up Trick ====
 let ttsUnlocked = false;
 
 function unlockTTS() {
     if (ttsUnlocked) return;
-    if ('speechSynthesis' in window) {
-        let msg = new SpeechSynthesisUtterance('');
-        msg.volume = 0; // completely silent
-        msg.rate = 1;
-        window.speechSynthesis.speak(msg);
-        ttsUnlocked = true;
-    }
+    let silentAudio = new Audio();
+    silentAudio.src = "data:audio/mp3;base64,//NExAAAAANIAAAAAExBTUUzLjEwMKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ==";
+    silentAudio.play().catch(e => console.log(e));
+    ttsUnlocked = true;
     document.removeEventListener('click', unlockTTS);
     document.removeEventListener('touchstart', unlockTTS);
 }
@@ -348,81 +345,56 @@ document.addEventListener('click', unlockTTS, { once: true });
 document.addEventListener('touchstart', unlockTTS, { once: true });
 
 
-// ==== Advanced Deep TTS Voice Selector (Async Safe) ====
-let availableVoices = [];
+// ==== Backend API TTS Fetching ====
+let currentAudio = null;
 
-function loadVoices() {
-    availableVoices = window.speechSynthesis.getVoices();
-}
-
-if ('speechSynthesis' in window) {
-    loadVoices();
-    // Watch for dynamic voice loading
-    if (speechSynthesis.onvoiceschanged !== undefined) {
-        speechSynthesis.addEventListener('voiceschanged', loadVoices);
+async function playSound(text, lang, btnElement) {
+    if (currentAudio && !currentAudio.paused && currentPlayingBtn === btnElement && btnElement !== null) {
+        currentAudio.pause();
+        if (btnElement) btnElement.classList.remove('playing');
+        currentPlayingBtn = null;
+        return;
     }
-}
 
-function playSound(text, lang, btnElement) {
-    if ('speechSynthesis' in window) {
-        if (window.speechSynthesis.speaking && currentPlayingBtn === btnElement && btnElement !== null) {
-            window.speechSynthesis.cancel();
-            if (btnElement) btnElement.classList.remove('playing');
-            currentPlayingBtn = null;
+    if (currentAudio) {
+        currentAudio.pause();
+        currentAudio = null;
+    }
+    document.querySelectorAll('.sound-btn.playing').forEach(btn => btn.classList.remove('playing'));
+
+    currentPlayingBtn = btnElement;
+    if (btnElement) btnElement.classList.add('playing'); // 로딩 피드백
+
+    try {
+        const response = await fetch(`/api/tts?text=${encodeURIComponent(text)}&lang=${lang}`);
+
+        if (!response.ok) throw new Error('TTS 서버 에러');
+
+        const blob = await response.blob();
+        const audioUrl = URL.createObjectURL(blob);
+
+        if (currentPlayingBtn !== btnElement) {
+            URL.revokeObjectURL(audioUrl);
             return;
         }
 
-        window.speechSynthesis.cancel();
-        document.querySelectorAll('.sound-btn.playing').forEach(btn => btn.classList.remove('playing'));
-        currentPlayingBtn = btnElement;
-
-        // 영문의 경우 대문자로만 구성되어 있으면 알파벳을 한 글자씩 끊어 읽는 문제를 방지하기 위해 강제로 소문자 변환
-        const speakText = (lang !== 'ko-KR') ? text.toLowerCase() : text;
-        const utterance = new SpeechSynthesisUtterance(speakText);
-        utterance.lang = lang;
-        utterance.rate = (lang === 'ko-KR') ? 0.85 : 0.9;
-        utterance.pitch = (lang === 'ko-KR') ? 1.2 : 1.1;
-
-        if (availableVoices.length > 0) {
-            // 로컬 OS 및 브라우저에서 '가장 사람에 가까운' 고품질/온라인/신경망 음성을 우선 탐색
-            let voiceLangPool = availableVoices.filter(v => v.lang.startsWith(lang.substring(0, 2)));
-            let exactLocaleVoices = voiceLangPool.filter(v => v.lang.replace('_', '-').toLowerCase() === lang.toLowerCase());
-
-            const qualityKeywords = ['natural', 'online', 'premium', 'neural', 'google', 'siri'];
-
-            // 1. 해당 지역(ko-KR, en-GB 등)에서 고품질 음성 탐색
-            let selectedVoice = exactLocaleVoices.find(v => qualityKeywords.some(k => v.name.toLowerCase().includes(k)));
-
-            // 2. 없다면, 해당 언어(en-US 등) 기반 플랫폼 고품질 음성 탐색 (기계음 방지용 대체)
-            if (!selectedVoice) {
-                selectedVoice = voiceLangPool.find(v => qualityKeywords.some(k => v.name.toLowerCase().includes(k)));
-            }
-
-            // 3. 완전 실패 시 기본 제공 음성
-            if (!selectedVoice) {
-                selectedVoice = exactLocaleVoices[0] || voiceLangPool[0];
-            }
-
-            if (selectedVoice) {
-                utterance.voice = selectedVoice;
-            }
-        }
-
-        if (btnElement) {
-            utterance.onstart = () => btnElement.classList.add('playing');
-            utterance.onend = () => {
-                btnElement.classList.remove('playing');
-                if (currentPlayingBtn === btnElement) currentPlayingBtn = null;
-            };
-            utterance.onerror = () => {
-                btnElement.classList.remove('playing');
-                if (currentPlayingBtn === btnElement) currentPlayingBtn = null;
-            };
-        }
-
-        window.speechSynthesis.speak(utterance);
-    } else {
-        alert("이 브라우저에서는 소리 재생을 지원하지 않아요.");
+        currentAudio = new Audio(audioUrl);
+        currentAudio.onended = () => {
+            if (btnElement) btnElement.classList.remove('playing');
+            if (currentPlayingBtn === btnElement) currentPlayingBtn = null;
+            URL.revokeObjectURL(audioUrl);
+        };
+        currentAudio.onerror = () => {
+            if (btnElement) btnElement.classList.remove('playing');
+            if (currentPlayingBtn === btnElement) currentPlayingBtn = null;
+            alert("음성 처리에 오류가 발생했습니다.");
+        };
+        currentAudio.play();
+    } catch (error) {
+        console.error(error);
+        alert("음성 서버에 연결할 수 없어요. 로컬 백엔드(Docker)가 켜져 있는지 확인해 주세요.");
+        if (btnElement) btnElement.classList.remove('playing');
+        if (currentPlayingBtn === btnElement) currentPlayingBtn = null;
     }
 }
 
@@ -541,7 +513,7 @@ function showCompletionModal() {
     toast.classList.add('show');
 
     // Play celebratory TTS
-    if ('speechSynthesis' in window && ttsUnlocked) {
+    if (ttsUnlocked) {
         playSound("이야기 끝! 참 잘했어요!", 'ko-KR', null);
     }
 
