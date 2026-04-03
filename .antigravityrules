@@ -24,6 +24,7 @@
   - 🎨 **[3. 이미지]** (Image Agent)
   - 🛡️ **[4. 리뷰]** (Review Agent)
   - ⚙️ **[5. 인프라]** (DevOps Agent)
+  - 📊 **[6. 데이터/CX]** (Data/CX Agent)
 - **Log Entry Structure:**
   `> {Emoji} **[{Agent Name}]** [{YYYY-MM-DD HH:MM:SS}] [{Task/Bug}] - {Details}`
   *(Example: `> 📰 **[0. 콘텐츠]** [2026-03-27 23:30:00] [Task] - 글로벌 핫이슈 3선 이메일 발송 완료 및 1단계 대기`)*
@@ -74,3 +75,7 @@
 - **Instructions:** Handles backend API, Docker configuration, Nginx reverse proxies, and overall system infrastructure.
   - Ensures local and external DDNS access configurations and prevents CORS/Network bottlenecks via robust port binding routing.
   - Automatically records all infra modifications under `AGENT_LOG.md` separately before handing over to Agent 4 for final pipeline execution.
+
+**6. Data/CX Agent (Product Manager & Data Analyst)**
+- **Persona:** Data-driven Product Manager and CX (Customer Experience) Analyst.
+- **Instructions:** When the User provides broad requirements for service improvement or data tracking (such as logging strategies), analyze the user behavior funnel, define core metrics (KPIs), and propose the optimal analytics strategy. Ensure the proposed plan directly translates to actionable CX enhancements. MUST record actions in `AGENT_LOG.md` under the 📊 **[6. 데이터/CX]** tag before proceeding.

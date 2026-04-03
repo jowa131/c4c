@@ -1,5 +1,6 @@
 import re
-from fastapi import FastAPI, HTTPException, Query
+import json
+from fastapi import FastAPI, HTTPException, Query, Request
 from fastapi.responses import StreamingResponse
 from fastapi.middleware.cors import CORSMiddleware
 import edge_tts
@@ -55,3 +56,13 @@ async def generate_tts(text: str = Query(...), lang: str = Query("ko-KR")):
         return StreamingResponse(iterfile(), media_type="audio/mpeg")
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/api/log")
+async def receive_log(request: Request):
+    try:
+        data = await request.json()
+        with open("analytics.jsonl", "a", encoding="utf-8") as f:
+            f.write(json.dumps(data, ensure_ascii=False) + "\\n")
+        return {"status": "ok"}
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))

@@ -274,6 +274,19 @@ let currentDeck = [];
 let currentIndex = 0;
 let autoPlayedCards = new Set();
 let currentPlayingBtn = null;
+let cardEnterTime = Date.now();
+
+async function sendAnalytics(eventName, payload) {
+    try {
+        const data = { eventName, timestamp: new Date().toISOString(), ...payload };
+        fetch('api/log', {
+            method: 'POST',
+            keepalive: true,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        }).catch(err => console.error("Log error:", err));
+    } catch (e) { }
+}
 
 const homeMenu = document.getElementById('homeMenu');
 const carouselView = document.getElementById('carouselView');
@@ -303,6 +316,9 @@ function loadTopic(topicId) {
     activeTopicId = topicId;
     currentDeck = topicsData[topicId].cards;
     currentIndex = 0;
+    cardEnterTime = Date.now();
+
+    sendAnalytics('topic_start', { topic: topicId });
 
     // Switch View - FIX ALIGNMENT SKEW BUG BY AVOIDING 'flex' ON THE CAROUSEL WRAPPER OR FORCING COLUMN
     homeMenu.style.display = 'none';
@@ -321,6 +337,7 @@ function loadTopic(topicId) {
 }
 
 homeBtn.addEventListener('click', () => {
+    sendAnalytics('topic_quit', { topic: activeTopicId, last_index: currentIndex });
     if (typeof currentAudio !== 'undefined' && currentAudio) currentAudio.pause();
     carouselView.style.display = 'none';
     homeBtn.style.display = 'none';
@@ -349,6 +366,7 @@ document.addEventListener('touchstart', unlockTTS, { once: true });
 let currentAudio = null;
 
 async function playSound(text, lang, btnElement) {
+    sendAnalytics('tts_play_start', { text_type: lang === 'ko-KR' ? 'sentence' : 'word', lang: lang });
     if (currentAudio && !currentAudio.paused && currentPlayingBtn === btnElement && btnElement !== null) {
         currentAudio.pause();
         if (btnElement) btnElement.classList.remove('playing');
@@ -492,7 +510,15 @@ function updateButtons() {
 
 function goToCard(index) {
     if (index < 0 || index >= currentDeck.length) return;
+
+    sendAnalytics('card_viewtime', {
+        topic: activeTopicId,
+        card_index: currentIndex,
+        duration_ms: Date.now() - cardEnterTime
+    });
+
     currentIndex = index;
+    cardEnterTime = Date.now();
     updateCards();
 }
 
@@ -501,6 +527,7 @@ prevBtn.addEventListener('click', () => {
 });
 
 function showCompletionModal() {
+    sendAnalytics('topic_complete', { topic: activeTopicId });
     let toast = document.getElementById('completionToast');
     if (!toast) {
         toast = document.createElement('div');
