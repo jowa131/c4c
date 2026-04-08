@@ -1,0 +1,19 @@
+# 환경변수 파일 (절대 이미지에 포함 금지)
+.env
+.env.*
+
+# 로그/데이터 파일 (런타임에 볼륨으로 관리)
+analytics.jsonl
+*.log
+
+# 개발/테스트 잔여물
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+
+# Git
+.git
+.gitignore

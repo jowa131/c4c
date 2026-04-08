@@ -1,7 +1,7 @@
 fastapi==0.103.2
 uvicorn==0.23.2
-edge-tts
-apscheduler
-google-genai
-python-dotenv
-pytz
+edge-tts==7.2.8
+apscheduler==3.11.2
+google-genai==1.70.0
+python-dotenv==1.2.2
+pytz==2026.1

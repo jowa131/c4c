@@ -1,5 +1,10 @@
 .env
+.env.*
 node_modules/
 assets/*.png
 assets/*.jpg
 public/assets/
+
+# Docker
+docker-compose.override.yml
+analytics.jsonl
