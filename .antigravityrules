@@ -16,13 +16,27 @@
 ---
 
 ## [Agent Activity Logging (GitHub Projects Integration)]
-- **Mandatory Pre-Action Ticket Creation:** BEFORE executing any task, EVERY agent (0 to 6) MUST create a GitHub Issue representing the upcoming action using the GitHub CLI (`gh issue create`). 
-- **Mandatory Completion Status (Close & Comment):** AFTER the action has been successfully completed, the agent MUST add a comment summarizing the executed task (`gh issue comment <url> --body "Summary: 소요 시간 및 승인 지연/특이사항 등"`) and then explicitly close the issue (`gh issue close <url>`).
+- **One Ticket Per Agent (Strict):** Each agent (0~6) MUST create its OWN separate GitHub Issue for its own work. Do NOT bundle multiple agents into a single issue.
+- **Mandatory Pre-Action Ticket Creation:** BEFORE executing any task, the agent MUST create a GitHub Issue using the GitHub CLI (`gh issue create`).
+  - The issue body MUST include `Start Date: YYYY-MM-DD HH:MM KST`
+- **Mandatory Completion Status (Close & Comment):** AFTER the action is complete, the agent MUST:
+  1. Add a completion comment: `gh issue comment <url> --body "완료 요약: ..."`
+  2. Close the issue: `gh issue close <url>`
+- **Feature Branch Per Agent:** Each agent MUST work on its own feature branch:
+  - Branch format: `agent/<role>/<short-description>` (e.g., `agent/image/mars-cards`)
+  - Create branch: `git checkout -b agent/<role>/<short-description>`
+  - Commit only the agent's own files, then push the branch.
+- **Pull Request & Link:** After pushing the branch, the agent MUST create a PR and link it to the issue:
+  - `gh pr create --title "..." --body "Closes #<issue-number>" --head <branch>`
+  - The issue body must reference the PR once created: add a comment `gh issue comment <url> --body "PR: <pr-url>"`
+- **Agent-Scoped Commits:** Each agent pushes ONLY its own changed files. Do NOT mix files from different agents in one commit.
 - **GitHub CLI Command (Creation):**
-  Execute the following command to register the ticket directly to the target repo/project board:
-  `gh issue create --repo jowa131/c4c --title "[{role} agent] {Short Task Summary}" --body "{Detailed Action Plan}"`
-  *(Example Title: `[review agent] 칸반 보드 연동 테스트`)*
-- **Agent Identity Format (Strictly No Emojis):** Do not use emojis anywhere for agent identities. Use plain English agent roles for maximum systematic visibility.
+  ```
+  gh issue create --repo jowa131/c4c \
+    --title "[{role} agent] {Short Task Summary}" \
+    --body "Start Date: {YYYY-MM-DD HH:MM KST}\n\n{Detailed Action Plan}"
+  ```
+- **Agent Identity Format (Strictly No Emojis):** Use plain English agent roles:
   - content agent
   - planner agent
   - developer agent
