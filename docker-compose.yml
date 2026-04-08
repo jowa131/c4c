@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: c4c-backend
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    volumes:
+      # analytics 로그: 컨테이너 재시작 시에도 데이터 보존
+      - analytics_data:/app/analytics.jsonl
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c",
+             "import urllib.request; urllib.request.urlopen('http://localhost:8000/docs')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+volumes:
+  analytics_data:
