@@ -266,6 +266,53 @@ const topicsData = {
                 ]
             }
         ]
+    },
+    mars: {
+        title: "화성에서 물 흔적 발견! 🪐",
+        icon: "🪐",
+        desc: "NASA 탐사 로봇이 화성에서 발견한 놀라운 비밀",
+        cards: [
+            {
+                image: 'assets/mars_card_1.png',
+                text: "저 멀리 빨간 별처럼 빛나는 화성! 우리 지구 바로 옆에 있는 이웃 행성이에요. 과학자들은 화성에 사람이 살 수 있을지 매일매일 열심히 연구하고 있답니다.",
+                vocab: [
+                    { word: "MARS", meaning: "화성" },
+                    { word: "PLANET", meaning: "행성" }
+                ]
+            },
+            {
+                image: 'assets/mars_card_2.png',
+                text: "NASA가 보낸 탐사 로봇 퍼서비어런스가 화성 바닥을 요리조리 신나게 돌아다니며 탐험 중이에요! 이 로봇은 우리 눈 대신 화성을 탐험하는 용감한 친구랍니다.",
+                vocab: [
+                    { word: "ROVER", meaning: "탐사 로봇" },
+                    { word: "EXPLORE", meaning: "탐험" }
+                ]
+            },
+            {
+                image: 'assets/mars_card_3.png',
+                text: "어, 저게 뭐지? 탐사 로봇이 화성 바위에서 물이 흘렀던 흔적을 발견했어요! 이 신기한 발견에 전 세계 과학자들이 모두 깜짝 놀랐답니다.",
+                vocab: [
+                    { word: "WATER", meaning: "물" },
+                    { word: "DISCOVER", meaning: "발견" }
+                ]
+            },
+            {
+                image: 'assets/mars_card_4.png',
+                text: "물이 있었다는 건, 어쩌면 아주아주 작은 생명체가 화성에도 살았을 수 있다는 뜻이에요! 과학자들은 오늘도 두근두근하는 마음으로 화성의 비밀을 풀고 있어요.",
+                vocab: [
+                    { word: "LIFE", meaning: "생명" },
+                    { word: "SCIENCE", meaning: "과학" }
+                ]
+            },
+            {
+                image: 'assets/mars_card_5.png',
+                text: "언젠가 우리도 우주선을 타고 화성에 직접 가볼 수 있을 거예요! 지금의 발견이 미래 우주 탐험가들의 꿈이 되고 있답니다. 여러분도 멋진 우주 탐험가가 되어볼까요?",
+                vocab: [
+                    { word: "SPACE", meaning: "우주" },
+                    { word: "FUTURE", meaning: "미래" }
+                ]
+            }
+        ]
     }
 };
 

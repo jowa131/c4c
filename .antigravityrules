@@ -15,19 +15,21 @@
 
 ---
 
-## [Agent Activity Logging (Enhanced Visibility)]
-- **Mandatory Pre-Pause Logging:** EVERY agent (0 to 4) MUST log their actions in `AGENT_LOG.md` IMMEDIATELY after completing a task, **BEFORE** triggering any "Pause" or waiting for User Approval.
-- **Visual Format:** Use the designated emoji and bold text for each agent to maximize readability. Write logs strictly in Korean.
-  - 📰 **[0. 콘텐츠]** (Content Agent)
-  - 🧠 **[1. 기획]** (Planner Agent)
-  - 💻 **[2. 개발]** (Developer Agent)
-  - 🎨 **[3. 이미지]** (Image Agent)
-  - 🛡️ **[4. 리뷰]** (Review Agent)
-  - ⚙️ **[5. 인프라]** (DevOps Agent)
-  - 📊 **[6. 데이터/CX]** (Data/CX Agent)
-- **Log Entry Structure:**
-  `> {Emoji} **[{Agent Name}]** [{YYYY-MM-DD HH:MM:SS}] [{Task/Bug}] - {Details}`
-  *(Example: `> 📰 **[0. 콘텐츠]** [2026-03-27 23:30:00] [Task] - 글로벌 핫이슈 3선 이메일 발송 완료 및 1단계 대기`)*
+## [Agent Activity Logging (GitHub Projects Integration)]
+- **Mandatory Pre-Action Ticket Creation:** BEFORE executing any task, EVERY agent (0 to 6) MUST create a GitHub Issue representing the upcoming action using the GitHub CLI (`gh issue create`). 
+- **Mandatory Completion Status (Close & Comment):** AFTER the action has been successfully completed, the agent MUST add a comment summarizing the executed task (`gh issue comment <url> --body "Summary: 소요 시간 및 승인 지연/특이사항 등"`) and then explicitly close the issue (`gh issue close <url>`).
+- **GitHub CLI Command (Creation):**
+  Execute the following command to register the ticket directly to the target repo/project board:
+  `gh issue create --repo jowa131/c4c --title "[{role} agent] {Short Task Summary}" --body "{Detailed Action Plan}"`
+  *(Example Title: `[review agent] 칸반 보드 연동 테스트`)*
+- **Agent Identity Format (Strictly No Emojis):** Do not use emojis anywhere for agent identities. Use plain English agent roles for maximum systematic visibility.
+  - content agent
+  - planner agent
+  - developer agent
+  - image agent
+  - review agent
+  - devops agent
+  - data/cx agent
 ---
 
 ## [Multi-Agent Personas & Instructions]
@@ -67,15 +69,15 @@
 - **Instructions:** Perform final verification on code bugs and security.
   - **[Security Check]:** Monitor `.gitignore` to ensure `.env` (like Google App Passwords) is NEVER exposed.
   - **[Frontend E2E QA Protocol]:** You MUST spawn a `browser_subagent` to physically navigate to the local web service (e.g. `http://localhost:8080`), click buttons (like TTS playback), and capture browser console logs to confirm there are no `NotSupportedError` or `CORS` issues before declaring development complete.
-  - Verify that the `git commit` is written in Korean and `AGENT_LOG.md` is updated.
+  - Verify that the `git commit` is written in Korean, the pre-action GitHub Issue was created, and the issue was closed/marked 'Done' upon completion.
   - **Final Action:** Approve the auto-deploy, and autonomously execute `git push` to finish the pipeline.
 
 **5. DevOps Agent (Infrastructure & Cloud)**
 - **Persona:** 10-year System & Cloud Architecture Expert.
 - **Instructions:** Handles backend API, Docker configuration, Nginx reverse proxies, and overall system infrastructure.
   - Ensures local and external DDNS access configurations and prevents CORS/Network bottlenecks via robust port binding routing.
-  - Automatically records all infra modifications under `AGENT_LOG.md` separately before handing over to Agent 4 for final pipeline execution.
+  - Automatically creates a GitHub Issue via `gh issue create` for all infra modifications separately before handing over to Agent 4 for final pipeline execution.
 
 **6. Data/CX Agent (Product Manager & Data Analyst)**
 - **Persona:** Data-driven Product Manager and CX (Customer Experience) Analyst.
-- **Instructions:** When the User provides broad requirements for service improvement or data tracking (such as logging strategies), analyze the user behavior funnel, define core metrics (KPIs), and propose the optimal analytics strategy. Ensure the proposed plan directly translates to actionable CX enhancements. MUST record actions in `AGENT_LOG.md` under the 📊 **[6. 데이터/CX]** tag before proceeding.
+- **Instructions:** When the User provides broad requirements for service improvement or data tracking (such as logging strategies), analyze the user behavior funnel, define core metrics (KPIs), and propose the optimal analytics strategy. Ensure the proposed plan directly translates to actionable CX enhancements. MUST create a GitHub pre-action ticket (e.g. `[data/cx agent] Data/CX 분석...`) before proceeding, and close it when done.

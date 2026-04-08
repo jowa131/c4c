@@ -1,11 +1,27 @@
 import re
 import json
+import asyncio
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI, HTTPException, Query, Request
 from fastapi.responses import StreamingResponse
 from fastapi.middleware.cors import CORSMiddleware
 import edge_tts
 
-app = FastAPI()
+from scheduler import create_scheduler, run_content_agent
+
+# ─────────────────────────────────────────────
+# 앱 Lifespan — 스케줄러 시작/종료
+# ─────────────────────────────────────────────
+scheduler = create_scheduler()
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    scheduler.start()
+    yield
+    scheduler.shutdown()
+
+app = FastAPI(lifespan=lifespan)
 
 # 프론트엔드(80) 요청을 허용 (CORS)
 app.add_middleware(
@@ -16,15 +32,17 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
+# ─────────────────────────────────────────────
+# TTS
+# ─────────────────────────────────────────────
 def preprocess_text_for_kids(text: str) -> str:
     """7세 아동에 맞춘 다정하고 부드러운 구어체 및 쉼표 휴지기 처리"""
     text = re.sub(r'([가-힣])(합니다|\.입니다)([ \.\!\?])', r'\1해요\3', text)
     text = re.sub(r'([가-힣])(습니다)([ \.\!\?])', r'\1어요\3', text)
-    
     text = text.replace("!", "! ")
     text = text.replace("?", "? ")
     text = text.replace(".", ". ")
-    
     return text
 
 @app.get("/api/tts")
@@ -37,7 +55,7 @@ async def generate_tts(text: str = Query(...), lang: str = Query("ko-KR")):
     voice = "ko-KR-SunHiNeural"
     # 아이들이 알아듣기 쉽게 약간 느리게 설정 (-10%)
     rate = "-10%"
-    
+
     if lang == "ko-KR":
         processed_text = preprocess_text_for_kids(text)
     else:
@@ -45,24 +63,41 @@ async def generate_tts(text: str = Query(...), lang: str = Query("ko-KR")):
         processed_text = text.lower()
         voice = "en-US-AriaNeural"
         rate = "-5%"
-        
+
     try:
         async def iterfile():
             communicate = edge_tts.Communicate(processed_text, voice, rate=rate)
             async for chunk in communicate.stream():
                 if chunk["type"] == "audio":
                     yield chunk["data"]
-                    
+
         return StreamingResponse(iterfile(), media_type="audio/mpeg")
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+
+# ─────────────────────────────────────────────
+# 유저 로그 수집
+# ─────────────────────────────────────────────
 @app.post("/api/log")
 async def receive_log(request: Request):
     try:
         data = await request.json()
         with open("analytics.jsonl", "a", encoding="utf-8") as f:
-            f.write(json.dumps(data, ensure_ascii=False) + "\\n")
+            f.write(json.dumps(data, ensure_ascii=False) + "\n")
         return {"status": "ok"}
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
+
+
+# ─────────────────────────────────────────────
+# Content Agent 수동 트리거 (테스트용)
+# ─────────────────────────────────────────────
+@app.post("/api/content-agent/trigger")
+async def trigger_content_agent():
+    """Content Agent를 즉시 실행합니다 (테스트/수동 발송용)."""
+    try:
+        await asyncio.to_thread(run_content_agent)
+        return {"status": "ok", "message": "Content Agent 실행 완료. 이메일을 확인하세요."}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
