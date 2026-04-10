@@ -253,8 +253,8 @@ const topicsData = {
                 image: 'assets/ocean_card4.png',
                 text: "배가 터지도록 다 먹어 치운 빵빵한 통통이는 신나게 재활용 공장으로 달려가요! 플라스틱 병이 과연 어떤 삐까뻔쩍한 새 장난감으로 변신할까요?",
                 vocab: [
-                    { word: "RECYCLING", 단어: "재활용" },
-                    { word: "NEW TOY", 단어: "새 장난감" }
+                    { word: "RECYCLING", meaning: "재활용" },
+                    { word: "NEW TOY", meaning: "새 장난감" }
                 ]
             },
             {
@@ -310,6 +310,53 @@ const topicsData = {
                 vocab: [
                     { word: "SPACE", meaning: "우주" },
                     { word: "FUTURE", meaning: "미래" }
+                ]
+            }
+        ]
+    },
+    who: {
+        title: "세계 보건의 날과 WHO 🏥",
+        icon: "🩺",
+        desc: "전 세계 친구들의 건강을 지켜주는 고마운 의사 선생님들",
+        cards: [
+            {
+                image: 'assets/who_card1.png',
+                text: "친구들 안녕! 여러분은 아플 때 누구를 만나러 가나요? 맞아요, 친절한 의사 선생님이에요. 매년 4월에는 전 세계 모든 사람들의 건강을 응원하는 '세계 보건의 날'이 있답니다.",
+                vocab: [
+                    { word: "HEALTH", meaning: "건강" },
+                    { word: "DOCTOR", meaning: "의사" }
+                ]
+            },
+            {
+                image: 'assets/who_card2.png',
+                text: "그런데 우리 동네 병원처럼, 지구 전체를 돌보고 지켜주는 아주 커다란 병원 같은 곳이 있어요. 바로 '세계보건기구(WHO)'라는 곳이에요!",
+                vocab: [
+                    { word: "WORLD", meaning: "세계" },
+                    { word: "ORGANIZATION", meaning: "기구" }
+                ]
+            },
+            {
+                image: 'assets/who_card3.png',
+                text: "WHO에 모여 있는 똑똑한 어른들은 나쁜 병균이 퍼지지 않게 막아주고, 맛있는 음식과 깨끗한 물을 마실 수 있도록 전 세계 친구들을 든든하게 도와준대요.",
+                vocab: [
+                    { word: "SCIENTIST", meaning: "과학자" },
+                    { word: "CLEAN WATER", meaning: "깨끗한 물" }
+                ]
+            },
+            {
+                image: 'assets/who_card4.png',
+                text: "나쁜 감기 바이러스가 유행할 때, '친구들, 손을 뽀득뽀득 씻고 마스크를 꼭 써요!' 하고 가장 먼저 알려주는 분들도 바로 이 WHO의 멋진 선생님들이에요.",
+                vocab: [
+                    { word: "WASH HANDS", meaning: "손 씻기" },
+                    { word: "WEAR MASK", meaning: "마스크 쓰기" }
+                ]
+            },
+            {
+                image: 'assets/who_card5.png',
+                text: "건강하게 뛰어놀기 위해 우리도 매일매일 치카치카 양치질도 잘하고 밥도 골고루 먹기로 약속해요! 우리 모두가 함께 노력하면 지구가 엄청 튼튼해질 거예요.",
+                vocab: [
+                    { word: "BRUSH TEETH", meaning: "양치질하기" },
+                    { word: "HEALTHY EARTH", meaning: "건강한 지구" }
                 ]
             }
         ]
@@ -475,15 +522,24 @@ function renderCards() {
         card.className = `card ${index === 0 ? 'active' : ''} ${index < currentIndex ? 'prev' : ''}`;
         card.dataset.index = index;
 
-        const vocabHtml = data.vocab.map(v => `
+        const vocabHtml = (data.vocab && data.vocab.length > 0)
+            ? data.vocab.map(v => `
             <li class="vocab-item">
                 <span class="vocab-word">🧩 ${v.word}</span>
                 <button class="sound-btn" onclick="playSound('${v.word.replace(/'/g, "\\'")}', 'en-GB', this)" title="영어 듣기">
                     🔊
                 </button>
-                <span class="vocab-meaning">${v.meaning || v.단어}</span>
+                <span class="vocab-meaning">${v.meaning}</span>
             </li>
-        `).join('');
+        `).join('')
+            : '';
+
+        const vocabSection = vocabHtml
+            ? `<div class="vocab-section">
+                    <div class="vocab-title">🔡 그림 속 영어 단어 읽어보기</div>
+                    <ul class="vocab-list">${vocabHtml}</ul>
+                </div>`
+            : '';
 
         card.innerHTML = `
             <div class="card-image-container">
@@ -496,12 +552,7 @@ function renderCards() {
                         🔊
                     </button>
                 </div>
-                <div class="vocab-section">
-                    <div class="vocab-title">🔡 그림 속 영어 단어 읽어보기</div>
-                    <ul class="vocab-list">
-                        ${vocabHtml}
-                    </ul>
-                </div>
+                ${vocabSection}
             </div>
         `;
 

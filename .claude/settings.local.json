@@ -1,0 +1,40 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git rm:*)",
+      "Bash(pip show:*)",
+      "Bash(pip3 show:*)",
+      "Bash(pip3 index:*)",
+      "Bash(curl -s https://pypi.org/pypi/edge-tts/json)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\('edge-tts:', d['info']['version']\\)\")",
+      "Bash(curl -s https://pypi.org/pypi/apscheduler/json)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\('apscheduler:', d['info']['version']\\)\")",
+      "Bash(curl -s https://pypi.org/pypi/google-genai/json)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\('google-genai:', d['info']['version']\\)\")",
+      "Bash(curl -s https://pypi.org/pypi/python-dotenv/json)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\('python-dotenv:', d['info']['version']\\)\")",
+      "Bash(curl -s https://pypi.org/pypi/pytz/json)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\('pytz:', d['info']['version']\\)\")",
+      "Bash(wait)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git remote:*)",
+      "Bash(git config:*)",
+      "Bash(gh.exe auth:*)",
+      "Bash(gh.exe pr:*)",
+      "Bash(gh.exe issue:*)",
+      "Bash(git -C /mnt/c/MyProject/C4C ls-files --error-unmatch .env)",
+      "Bash(python3 -c ':*)",
+      "Bash(docker build:*)",
+      "Bash(docker info:*)",
+      "Bash(echo \"exit: $?\")",
+      "Bash(cp:*)",
+      "Bash(sudo docker:*)",
+      "Bash(time docker-compose up:*)",
+      "Bash(/mnt/c/Program Files/GitHub CLI/gh.exe auth:*)",
+      "Bash(git:*)",
+      "Bash(sudo git:*)"
+    ]
+  }
+}

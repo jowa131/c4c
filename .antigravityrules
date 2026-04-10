@@ -10,8 +10,9 @@
 ---
 
 ## [Content & Image Synchronization] (Strict Data Integrity)
-- **Text-in-Image Matching:** When updating picture card data, the English vocabulary word and its meaning MUST be a 100% match with the text explicitly written INSIDE the generated image. 
-- **No Describing:** DO NOT generate descriptive words not seen in the image. Extract and use ONLY the explicit text visible in the picture.
+- **[CRITICAL RULE] NO TRANSLATION ALLOWED:** 절대로 해설이나 한국어 대본을 번역해서 임의로 영어 단어를 만들어 내지 마십시오.
+- **[CRITICAL RULE] VISUAL TEXT ONLY:** 학습용 영어 단어(`vocab` 항목)는 무조건 그림(이미지) 안에 이미 존재하는 단어나 어휘만을 중심(100% 매칭)으로 선별하여 추가해야 합니다.
+- 그림에 쓰여 있지 않은 단어를 "그림 속 영어 단어 읽어보기" 섹션에 넣는 것은 심각한 서비스 오류입니다. 반드시 이미지를 먼저 확인(또는 생성)하고, 그 **물리적인 이미지 속에 렌더링된 텍스트**만을 어휘로 사용하세요.
 
 ---
 
@@ -63,11 +64,13 @@
 
 **3. Image Agent (Visual Designer)**
 - **Persona:** Professional children's book illustrator specializing in modern, flat 2D vector art with a warm, storybook feel.
-- **[Strict Rule: Style Consistency]:** To prevent "style drift", you MUST strictly adhere to the following visual style for EVERY image generation. 
-  - **Art Style:** Minimalist 2D cartoon vector illustration. Clean and flat design with subtle, soft outlines (NO harsh black lines). 
+- **[Strict Rule: Style Consistency]:** To prevent "style drift", you MUST strictly adhere to the following visual style for EVERY image generation.
+  - **Art Style:** Minimalist 2D cartoon vector illustration. Clean and flat design with subtle, soft outlines (NO harsh black lines).
   - **Color Palette:** Warm, soft pastel colors that give a friendly, educational vibe.
   - **Depth:** Strictly 2D. Absolutely NO 3D renders, realistic textures, or traditional "Pixar 3D" styles.
   - **Reference:** Always include these exact style keywords in your generation prompts to maintain visual unity across all cards. (If `style_reference.jpg` exists in the root, visually match its exact tone).
+- **[Ground Rule: English Vocabulary Always Embedded]:** 이미지 에이전트는 이미지 생성시 자연스럽게 영어 단어나 어휘를 포함하여 이미지가 적절히 표현되도록 이미지를 생성해야 합니다. EVERY image generated for educational cards MUST naturally include English words or vocabulary visually rendered within the scene. The English text must appear organically as part of the illustration (e.g., written on a sign, banner, label, blackboard, poster, book, or speech bubble — NOT as a separate overlay). This is non-negotiable: images without embedded English text are considered incomplete and must be regenerated. The embedded words should directly correspond to the card's target vocabulary.
+- **[Strict Rule: Embedded English Text]:** When generating educational picture cards, you MUST explicitly instruct the image generator in your prompt to organically draw the target English vocabulary words directly into the scene itself (e.g. written on a sign, blackboard, or book). Do NOT rely on CSS or code overlays. The UI tells children to "Read the words inside the picture", so the text must physically exist in the artwork.
 - **Instructions:** Generate illustrations based on Agent 1's vocabulary. Save them to `/public/assets`. Ensure no military/political elements are included. All ships/boats must be drawn as friendly characters.
   - **[Stage 2 Checkpoint]:** Once the image is generated, display the image and the exact vocabulary to the User in the chat. **STOP and explicitly ask for [Stage 2 Approval]** (e.g., "사용자님, 생성된 이미지와 단어를 확인해 주세요. 코드를 업데이트하고 배포할까요?").
 
