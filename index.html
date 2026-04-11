@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="/C4C/">
     <title>어린이 글로벌 그림카드 🌍</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=2.1">
+    <link rel="stylesheet" href="styles.css?v=3.1">
 </head>
+
 <body>
     <div class="background-animation">
         <div class="bubble bubble1"></div>
@@ -16,7 +18,10 @@
         <div class="bubble bubble4"></div>
         <div class="bubble bubble5"></div>
     </div>
-    
+
+    <div class="visitor-count-display" id="visitorCountDisplay">
+        👥 누적 방문자 수: <strong id="visitorCountVal">...</strong>명
+    </div>
     <div class="app-container">
         <header>
             <h1>어린이 글로벌 그림카드 🌍</h1>
@@ -26,22 +31,42 @@
         <div id="homeMenu" class="home-menu">
             <!-- Menu Cards Injected here -->
         </div>
-        
+
         <main id="carouselView" class="carousel-container" style="display: none;">
             <!-- Cards will be injected by JavaScript -->
             <div class="cards-wrapper" id="cardsWrapper"></div>
-            
+
             <button class="nav-button prev" id="prevBtn" aria-label="Previous card">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M15 18l-6-6 6-6" />
+                </svg>
             </button>
             <button class="nav-button next" id="nextBtn" aria-label="Next card">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 18l6-6-6-6" />
+                </svg>
             </button>
-            
+
             <div class="progress-indicator" id="progressIndicator"></div>
         </main>
+
+        <!-- 피드백 우체통 -->
+        <div class="feedback-mailbox" id="feedbackMailbox">
+            <h3 style="margin-top:0;">📮 방문자 우체통</h3>
+            <p><strong>C4C 웹서비스</strong> 이용에 대한 여러분의 소중한 의견이나 원하는 그림 주제를 편하게 남겨주세요!</p>
+            <form id="feedbackForm" onsubmit="submitFeedback(event)">
+                <textarea id="feedback-content" placeholder="의견을 적어주세요..." required></textarea>
+                <div style="margin-top: 10px; display: flex; align-items: center;">
+                    <button type="submit" class="feedback-submit-btn">의견 보내기</button>
+                    <span id="feedback-status" style="margin-left: 15px; font-weight: bold;"></span>
+                </div>
+            </form>
+        </div>
     </div>
 
-    <script src="script.js?v=2.0"></script>
+    <script src="script.js?v=3.0"></script>
 </body>
+
 </html>

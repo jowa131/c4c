@@ -692,4 +692,38 @@ document.addEventListener('keydown', e => {
     }
 });
 
+// --- Visitor Count & Feedback ---
+document.addEventListener('DOMContentLoaded', () => {
+    fetch('api/visitor_count')
+        .then(res => res.json())
+        .then(data => {
+            if (data.count !== undefined) {
+                document.getElementById('visitorCountVal').innerText = data.count;
+            }
+        })
+        .catch(err => console.error("Visitor count fetch error:", err));
+});
+
+function submitFeedback(e) {
+    e.preventDefault();
+    let v = document.getElementById('feedback-content').value;
+    if (!v.trim()) return;
+
+    let formData = JSON.stringify({ content: v });
+
+    fetch('api/feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: formData
+    }).then(r => r.json()).then(data => {
+        document.getElementById('feedback-status').innerText = "✅ 소중한 의견 감사합니다!";
+        document.getElementById('feedback-status').style.color = "#27ae60";
+        document.getElementById('feedback-content').value = "";
+        setTimeout(() => { document.getElementById('feedback-status').innerText = ""; }, 4000);
+    }).catch(err => {
+        document.getElementById('feedback-status').innerText = "❌ 의견 전송에 실패했습니다.";
+        document.getElementById('feedback-status').style.color = "#e74c3c";
+    });
+}
+
 initHomeMenu();
