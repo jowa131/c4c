@@ -31,8 +31,6 @@ services:
       context: .
       dockerfile: Dockerfile.frontend
     container_name: c4c-frontend
-    volumes:
-      - ./:/usr/share/nginx/html:ro
     restart: unless-stopped
     networks:
       default:
