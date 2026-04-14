@@ -225,3 +225,17 @@ async def trigger_content_agent():
         return {"status": "ok", "message": "Content Agent 실행 완료. 이메일을 확인하세요."}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/content-agent/pending-topics")
+async def get_pending_topics():
+    """가장 최근에 생성된 주제 목록을 반환합니다."""
+    from scheduler import PENDING_TOPICS_PATH
+    if not os.path.exists(PENDING_TOPICS_PATH):
+        raise HTTPException(status_code=404, detail="생성된 주제가 없습니다. Content Agent를 먼저 실행해주세요.")
+    try:
+        with open(PENDING_TOPICS_PATH, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        return data
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

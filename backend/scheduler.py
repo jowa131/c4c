@@ -227,10 +227,29 @@ def send_email(topics: list[dict]) -> None:
 # ─────────────────────────────────────────────
 # 에이전트 실행 진입점
 # ─────────────────────────────────────────────
+PENDING_TOPICS_PATH = os.path.join(os.path.dirname(__file__), "pending_topics.json")
+
+
+def save_pending_topics(topics: list[dict]) -> None:
+    """생성된 주제 목록을 pending_topics.json에 저장."""
+    today = datetime.now(KST)
+    data = {
+        "generated_at": today.isoformat(),
+        "topics": topics,
+    }
+    try:
+        with open(PENDING_TOPICS_PATH, "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+        logger.info(f"✅ 주제 목록 저장 완료: {PENDING_TOPICS_PATH}")
+    except Exception as e:
+        logger.error(f"❌ 주제 목록 저장 실패: {e}")
+
+
 def run_content_agent() -> None:
     """컨텐츠 에이전트 전체 파이프라인 실행 (동기)."""
     logger.info("🤖 Content Agent 시작 — 주제 생성 중...")
     topics = generate_topics()
+    save_pending_topics(topics)
     send_email(topics)
     logger.info("🤖 Content Agent 완료.")
 
