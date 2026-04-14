@@ -16,6 +16,16 @@ import edge_tts
 from scheduler import create_scheduler, run_content_agent
 
 # ─────────────────────────────────────────────
+# 데이터 파일 경로 (Named Volume 마운트 디렉토리)
+# ─────────────────────────────────────────────
+DATA_DIR = os.path.join(os.path.dirname(__file__), "appdata")
+os.makedirs(DATA_DIR, exist_ok=True)
+
+ANALYTICS_PATH  = os.path.join(DATA_DIR, "analytics.jsonl")
+VISITORS_PATH   = os.path.join(DATA_DIR, "visitors.json")
+FEEDBACKS_PATH  = os.path.join(DATA_DIR, "feedbacks.json")
+
+# ─────────────────────────────────────────────
 # 앱 Lifespan — 스케줄러 시작/종료
 # ─────────────────────────────────────────────
 scheduler = create_scheduler()
@@ -90,7 +100,7 @@ async def generate_tts(text: str = Query(...), lang: str = Query("ko-KR")):
 async def receive_log(request: Request):
     try:
         data = await request.json()
-        with open("analytics.jsonl", "a", encoding="utf-8") as f:
+        with open(ANALYTICS_PATH, "a", encoding="utf-8") as f:
             f.write(json.dumps(data, ensure_ascii=False) + "\n")
         return {"status": "ok"}
     except Exception as e:
@@ -102,7 +112,7 @@ async def receive_log(request: Request):
 _file_data_lock = threading.Lock()
 
 def get_visitor_count(increment=False):
-    file_path = "visitors.json"
+    file_path = VISITORS_PATH
     with _file_data_lock:
         if os.path.exists(file_path):
             try:
@@ -131,7 +141,7 @@ async def api_visitor_count():
 
 
 def send_daily_feedbacks():
-    file_path = "feedbacks.json"
+    file_path = FEEDBACKS_PATH
     feedbacks = []
     
     with _file_data_lock:
@@ -187,7 +197,7 @@ async def api_feedback(request: Request):
     if not str(content).strip():
         raise HTTPException(status_code=400, detail="Content is empty")
 
-    file_path = "feedbacks.json"
+    file_path = FEEDBACKS_PATH
     timestamp = time.strftime('%Y-%m-%d %H:%M:%S')
     client_ip = request.headers.get('X-Forwarded-For', request.client.host if request.client else 'unknown')
 

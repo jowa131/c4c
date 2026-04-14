@@ -1,0 +1,21 @@
+# Git
+.git
+.gitignore
+.antigravityrules
+
+# AI context files (not needed in image)
+CLAUDE.md
+SKILL.md
+AGENT_LOG_DEPRECATED.md
+requirements.md
+
+# Backend (built separately)
+backend/
+
+# Dev/docs
+scripts/
+docs/
+
+# Env
+.env
+.env.*
