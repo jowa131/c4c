@@ -30,3 +30,22 @@ Frontend source files (`index.html`, `styles.css`, `script.js`) live in `fronten
 ## Reference
 
 For project-specific tech stack, libraries, and objectives, refer to `SKILL.md`.
+
+## Development Workflow & Execution Rules
+
+1. **Hot-Reloading & Sync**:
+   - 프론트엔드 파일(`frontend/`) 수정 시, `docker-compose.yml`의 볼륨 마운트를 통해 즉시 반영되도록 관리한다.
+   - 볼륨 마운트: `./frontend` → `/usr/share/nginx/html`, `./assets` → `/usr/share/nginx/html/assets`
+   - 만약 볼륨 마운트가 작동하지 않거나 환경 설정 파일(Dockerfile 등)을 수정했을 경우, 반드시 `docker compose up -d --build frontend` 명령을 실행하여 컨테이너를 갱신해야 한다.
+
+2. **Backend Updates**:
+   - 백엔드(`c4c-backend`) 소스 수정 후에는 반드시 `docker compose restart backend` 또는 재빌드 명령을 통해 변경 사항을 적용한다.
+
+3. **Verification**:
+   - 모든 수정 작업 후에는 반드시 터미널에서 `docker compose ps`를 통해 컨테이너 상태를 확인하고, 사용자에게 변경 사항이 적용되었음을 알린다.
+
+4. **Browser Cache Policy**:
+   - `index.html`은 반드시 `Cache-Control: no-cache, no-store, must-revalidate` 헤더를 응답에 포함해야 한다.
+   - 이는 `nginx.conf`의 `location = /index.html` 블록에서 설정하며, 절대 제거하지 않는다.
+   - `script.js`, `styles.css` 등 정적 자산은 `?v=X.X` 쿼리스트링으로 캐시 버스팅을 적용한다.
+   - 프론트엔드 코드 수정 시 `index.html`의 `script.js?v=X.X` 버전을 반드시 올려야 한다.
