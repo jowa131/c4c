@@ -33,7 +33,7 @@
 |---------|---------|
 | `edge-tts` | Streaming TTS audio (ko-KR SunHiNeural / en-US AriaNeural) |
 | `google-genai` | Gemini API — weekly topic generation from RSS news |
-| `apscheduler` | Cron-based content agent (Mon & Thu 09:00 KST) |
+| `apscheduler` | 스케줄러 인스턴스 유지 (자동 콘텐츠 에이전트 비활성화, 수동 트리거만 허용) |
 | `pytz` | Asia/Seoul timezone handling |
 | `python-dotenv` | `.env` loading in local dev (Docker injects vars directly) |
 
@@ -54,7 +54,7 @@
 
 ## Content Agent Pipeline
 
-1. **Trigger**: APScheduler fires every Mon & Thu at 09:00 KST (also available via `/api/content-agent/trigger`)
+1. **Trigger**: 자동 스케줄 비활성화됨. `/api/content-agent/trigger` 수동 호출로만 실행 가능
 2. **Fetch**: Pulls real Google News RSS (`world+news+when:7d`) — no hallucination allowed
 3. **Generate**: Gemini 2.5 Flash selects 3 diverse educational topics, outputs structured JSON
 4. **Save**: Writes to `backend/pending_topics.json` for API access

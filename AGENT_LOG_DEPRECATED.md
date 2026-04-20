@@ -21,3 +21,4 @@
 > 🛡️ **[4. 리뷰]** [2026-04-02 09:37:15] [Task] - 최종 보안(.gitignore) 검증 완료. 자동 배포 파이프라인(한글 커밋) 승인 및 실행.
 > 📊 **[6. 데이터/CX]** [2026-04-03 21:24:00] [Task] - 고객 경험 개선을 위한 프론트엔드/백엔드 로깅(`topic_start`, `card_viewtime`, `tts_play_start` 등) 전략 제안 및 기획안 구축 완료.
 > 💻 **[2. 개발]** [2026-04-03 21:24:30] [Task] - Data/CX 기획에 맞춰 FastAPI `/api/log` 엔드포인트 및 `script.js` 내 `sendAnalytics` 기능 및 각종 이벤트 트리거 연동 구현 완료.
+> ⚙️ **[5. DevOps]** [2026-04-20 10:19:00] [Task] - 콘텐츠 에이전트 자동 스케줄(월/목 09:00 KST) 비활성화. `scheduler.py`의 APScheduler cron 잡 주석 처리. 수동 트리거(`/api/content-agent/trigger`)는 유지.
