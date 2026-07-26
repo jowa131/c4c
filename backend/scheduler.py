@@ -258,18 +258,19 @@ def run_content_agent() -> None:
 # 스케줄러 팩토리
 # ─────────────────────────────────────────────
 def create_scheduler() -> AsyncIOScheduler:
-    """매주 월요일·목요일 09:00 KST에 실행되는 스케줄러를 생성하여 반환."""
+    """스케줄러 인스턴스를 생성하여 반환. (자동 콘텐츠 에이전트 비활성화됨)"""
     scheduler = AsyncIOScheduler(timezone=KST)
-    scheduler.add_job(
-        run_content_agent,
-        trigger="cron",
-        day_of_week="mon,thu",
-        hour=9,
-        minute=0,
-        id="content_agent_weekly",
-        name="Content Agent — Weekly Curation",
-        replace_existing=True,
-        misfire_grace_time=None,
-    )
-    logger.info("📅 Content Agent 스케줄 등록 완료: 매주 월/목 09:00 KST")
+    # 자동 실행 비활성화 — 수동 트리거(/api/content-agent/trigger)로만 사용
+    # scheduler.add_job(
+    #     run_content_agent,
+    #     trigger="cron",
+    #     day_of_week="mon,thu",
+    #     hour=9,
+    #     minute=0,
+    #     id="content_agent_weekly",
+    #     name="Content Agent — Weekly Curation",
+    #     replace_existing=True,
+    #     misfire_grace_time=None,
+    # )
+    logger.info("📅 Content Agent 자동 스케줄 비활성화됨 (수동 트리거만 허용)")
     return scheduler

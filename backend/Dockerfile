@@ -9,7 +9,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # non-root 유저로 실행 (보안 강화)
+# appdata 디렉토리를 이미지 레이어에 미리 생성해야 Named Volume 마운트 시 appuser 권한 유지
 RUN adduser --disabled-password --gecos "" appuser \
+    && mkdir -p /app/appdata \
     && chown -R appuser:appuser /app
 USER appuser
 

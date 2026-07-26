@@ -314,53 +314,6 @@ const topicsData = {
             }
         ]
     },
-    worldcup: {
-        title: "월드컵을 향한 신나는 발걸음! ⚽",
-        icon: "🌍",
-        desc: "전 세계 친구들이 하나 되는 축구 축제",
-        cards: [
-            {
-                image: 'assets/worldcup_card_1.png',
-                text: "전 세계에서 가장 신나는 축구 대회, '월드컵'이 다가오고 있어요! 수많은 나라의 친구들이 함께 응원하는 이 특별한 대회를 위해, 선수들이 지금 열심히 준비하고 있답니다.",
-                vocab: [
-                    { word: "WORLD CUP", meaning: "월드컵" },
-                    { word: "TOURNAMENT", meaning: "대회" }
-                ]
-            },
-            {
-                image: 'assets/worldcup_card_2.png',
-                text: "저 멀리 영국에서 온 잉글랜드 팀이에요! 빨간 유니폼을 입은 선수들이 땀을 뻘뻘 흘리며 연습, 또 연습! 최고의 팀이 되기 위해 온 힘을 다하고 있어요.",
-                vocab: [
-                    { word: "PRACTICE", meaning: "연습" },
-                    { word: "TEAM", meaning: "팀" }
-                ]
-            },
-            {
-                image: 'assets/worldcup_card_3.png',
-                text: "미국 플로리다에 있는 멋진 경기장에서 특별한 경기가 열려요! 수만 명의 관중들이 한자리에 모여 신나게 응원할 거예요. 함께라면 더 신나겠죠?",
-                vocab: [
-                    { word: "STADIUM", meaning: "경기장" },
-                    { word: "FANS", meaning: "팬(응원단)" }
-                ]
-            },
-            {
-                image: 'assets/worldcup_card_4.png',
-                text: "상대 팀은 중앙아메리카에서 온 코스타리카 팀이에요! 서로 다른 나라 친구들이 만나 공 하나로 신나게 경기를 해요. 축구는 전 세계를 친구로 만드는 마법이랍니다.",
-                vocab: [
-                    { word: "COMPETE", meaning: "경쟁하다" },
-                    { word: "FRIENDSHIP", meaning: "우정" }
-                ]
-            },
-            {
-                image: 'assets/worldcup_card_5.png',
-                text: "월드컵은 단순한 경기가 아니에요. 서로 다른 나라 친구들이 한자리에 모여 최선을 다하고, 박수 치고, 응원하는 특별한 축제예요! 우리 모두 함께 응원해요!",
-                vocab: [
-                    { word: "FESTIVAL", meaning: "축제" },
-                    { word: "TOGETHER", meaning: "함께" }
-                ]
-            }
-        ]
-    },
     who: {
         title: "세계 보건의 날과 WHO 🏥",
         icon: "🩺",
@@ -508,8 +461,10 @@ function loadTopic(topicId) {
 
     sendAnalytics('topic_start', { topic: topicId });
 
-    // Switch View - FIX ALIGNMENT SKEW BUG BY AVOIDING 'flex' ON THE CAROUSEL WRAPPER OR FORCING COLUMN
+    // Switch View
     homeMenu.style.display = 'none';
+    document.getElementById('visitorCountDisplay').style.display = 'none';
+    document.getElementById('feedbackMailbox').style.display = 'none';
     carouselView.style.display = 'flex';
     carouselView.style.flexDirection = 'column';
     carouselView.style.alignItems = 'center';
@@ -530,6 +485,8 @@ homeBtn.addEventListener('click', () => {
     carouselView.style.display = 'none';
     homeBtn.style.display = 'none';
     homeMenu.style.display = 'grid';
+    document.getElementById('visitorCountDisplay').style.display = '';
+    document.getElementById('feedbackMailbox').style.display = '';
 });
 
 // ==== iOS Audio Context Warm-up Trick ====
@@ -545,7 +502,6 @@ function unlockTTS() {
     document.removeEventListener('touchstart', unlockTTS);
 }
 
-// Bind unlock sequence to user's first interaction anywhere on the screen
 document.addEventListener('click', unlockTTS, { once: true });
 document.addEventListener('touchstart', unlockTTS, { once: true });
 
@@ -569,7 +525,7 @@ async function playSound(text, lang, btnElement) {
     document.querySelectorAll('.sound-btn.playing').forEach(btn => btn.classList.remove('playing'));
 
     currentPlayingBtn = btnElement;
-    if (btnElement) btnElement.classList.add('playing'); // 로딩 피드백
+    if (btnElement) btnElement.classList.add('playing');
 
     try {
         const response = await fetch(`api/tts?text=${encodeURIComponent(text)}&lang=${lang}`);
@@ -643,7 +599,7 @@ function renderCards() {
                 <div class="text-wrapper">
                     <div class="main-text">${data.text}</div>
                     <button class="sound-btn" onclick="playSound('${data.text.replace(/'/g, "\\'")}', 'ko-KR', this)" title="한국어 설명 듣기" style="flex-shrink:0;">
-                        🔊
+                         🔊
                     </button>
                 </div>
                 ${vocabSection}
@@ -676,14 +632,12 @@ function updateCards() {
         if (index === currentIndex) {
             card.classList.add('active');
 
-            // Auto-play on card reveal (every time navigating)
             if (ttsUnlocked) {
                 const text = currentDeck[index].text;
-                // Find matching button to animate
                 const btnArgs = card.querySelectorAll('.sound-btn');
                 let koBtn = null;
-                if (btnArgs.length > 0) koBtn = btnArgs[0]; // first sound btn is the text explanation
-                setTimeout(() => playSound(text, 'ko-KR', koBtn), 400); // slight delay for smooth visual transition
+                if (btnArgs.length > 0) koBtn = btnArgs[0];
+                setTimeout(() => playSound(text, 'ko-KR', koBtn), 400);
             }
         }
         else if (index < currentIndex) card.classList.add('prev');
@@ -729,7 +683,6 @@ function showCompletionModal() {
     toast.innerText = "🎉 이야기 끝! 참 잘했어요! 🎉";
     toast.classList.add('show');
 
-    // Play celebratory TTS
     if (ttsUnlocked) {
         playSound("이야기 끝! 참 잘했어요!", 'ko-KR', null);
     }

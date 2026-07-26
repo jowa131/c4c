@@ -11,8 +11,8 @@ services:
     env_file:
       - .env
     volumes:
-      # analytics 로그: 컨테이너 재시작 시에도 데이터 보존
-      - analytics_data:/app/analytics.jsonl
+      # 데이터 파일 영속성: 컨테이너 재생성 시에도 보존
+      - analytics_data:/app/appdata
     restart: unless-stopped
     networks:
       default:
