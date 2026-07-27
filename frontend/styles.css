@@ -544,9 +544,8 @@ header h1 {
     .card-image-container {
         width: 100%;
         height: auto;
-        /* Prioritize width dynamically */
+        max-height: 45%;
         aspect-ratio: 1 / 1;
-        /* Perfect square natively fills phone width without empty margins */
         flex-shrink: 0;
         border-right: none;
         border-bottom: 2px dashed #f0f0f0;
