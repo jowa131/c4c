@@ -1,0 +1,55 @@
+# c4c Agent Contract
+
+This independent repository follows the common rules in the personal
+`~/.codex/AGENTS.md` and this file. `C:\MyProject\AGENTS.md` governs only the
+MyProject root project and is not inherited here; use
+`C:\MyProject\docs\codex-shared-procedures.md` only for shared procedures a task
+links to.
+
+## Overview
+
+c4c combines a static browser UI with a Dockerized FastAPI backend, content
+generation, scheduling, and optional email delivery.
+
+## Structure
+
+| Area | Role |
+| --- | --- |
+| `index.html`, `script.js`, `styles.css` | Browser UI |
+| `backend/main.py` | FastAPI entry point |
+| `backend/scheduler.py` | Scheduled work boundary |
+| `scripts/send_topics.py` | Explicit topic-send utility |
+| `docker-compose.yml`, `compose.windows.yml` | Service topology |
+| `assets/` | Curated static images, not generated source code |
+
+## Required context
+
+Read `README-WINDOWS.md`, `requirements.md`, `.env.example`, and the active
+task packet before changing service behavior or delivery semantics.
+
+## Commands
+
+```powershell
+.\start-windows.ps1
+docker compose -f compose.windows.yml up --build
+docker compose -f compose.windows.yml down
+```
+
+No repository-wide test command is declared. Use only a focused command named
+by the current packet after inspecting `backend/test.py` and the changed surface.
+
+## Boundaries
+
+- Keep Gemini/API and Gmail/SMTP values in ignored environment files only.
+- Do not send email, start recurring delivery, or choose a schedule without
+  explicit user approval of the action and cadence.
+- Keep backend, scheduler, and manual send paths distinguishable in evidence.
+- Do not treat container start or an HTTP process as content approval or delivery success.
+- Do not commit `.env`, generated mail bodies, recipient data, or service logs.
+- Do not edit `assets/` merely to satisfy a backend task.
+
+## Handoff
+
+Report the exact compose file, services started, focused observable, external
+messages sent or not sent, and stop state. Git push and external publication
+remain separate authority.

@@ -1,0 +1,43 @@
+{
+  "project": "c4c",
+  "base": "d3890d681d7f77865dd865c50d8dd7839d2cc983",
+  "records": [
+    {
+      "sourceRoot": "root",
+      "source": "AGENTS.md",
+      "target": "source-history/git-sync-20261022/policy/AGENTS.windows-local.historical.txt",
+      "bytes": 2039,
+      "sha256": "7a5e374cea700fd747d1bff79b5ae4c4e9fcebe5dc716029de5037407faa2f16"
+    },
+    {
+      "sourceRoot": "root",
+      "source": "wiki/AGENTS.md",
+      "target": "wiki/AGENTS.md",
+      "bytes": 676,
+      "sha256": "af0e0aa04eb643ba77f1bb8822f15ae0f7e631e69975393bee07d79b0fda71db"
+    },
+    {
+      "sourceRoot": "root",
+      "source": "wiki/DECISIONS.md",
+      "target": "wiki/DECISIONS.md",
+      "bytes": 434,
+      "sha256": "f10ef43a1dcb3be1f092463d5417cd2dae625af11bdd8d7c6f277d0decbf728c"
+    },
+    {
+      "sourceRoot": "root",
+      "source": "wiki/PROJECT_STATE.md",
+      "target": "wiki/PROJECT_STATE.md",
+      "bytes": 534,
+      "sha256": "5323b258b41146bc5f99c5e1bf0d184fb3e2bb3edf6d8f7a84cf8eba682c1159"
+    },
+    {
+      "sourceRoot": "root",
+      "source": "wiki/README.md",
+      "target": "wiki/README.md",
+      "bytes": 258,
+      "sha256": "b61827e8ad71e7298013c7c0ab2f485a9bf88bd3f58fa71df007fd3f40492ccb"
+    }
+  ],
+  "excluded": [],
+  "sourceKind": "existing working source preservation, not implementation or runtime acceptance"
+}
